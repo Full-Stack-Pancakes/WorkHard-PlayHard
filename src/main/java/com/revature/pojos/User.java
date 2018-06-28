@@ -24,6 +24,8 @@ public class User {
 	String email;
 	@Column
 	String phone;
+	@Column
+	String password;
 	
 	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinTable(	name="USER_EVENT",
@@ -95,11 +97,19 @@ public class User {
 	public void addEvents(Event e) {
 		this.events.add(e);
 	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	@Override
 	public String toString() {
 		return "User [userid=" + userid + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email
-				+ ", phone=" + phone + ", events=" + events + "]";
+				+ ", phone=" + phone + ", password=" + password + ", events=" + events + "]";
 	}
 	
 }
