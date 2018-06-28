@@ -1,11 +1,4 @@
 # WorkHard-PlayHard
 
 
-***Do not touch master branch!***
-
-Any feature you add should be developed on a branch derived from the <bold>dev</bold> branch.
-
-Push to and pull from the dev branch, and then the whole team can ensure that it works before the git master merges it with the master branch.
-
-git pull
-git checkout dev (or git checkout [your own development branch])
+Simplifying the workflow a bit. We each use our own development branch (Sydney will use the ‘dev’ branch. Create a pull request when you’re done with your task and we will merge it with master. 
