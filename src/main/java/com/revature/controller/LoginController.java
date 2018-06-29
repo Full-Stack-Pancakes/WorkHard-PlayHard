@@ -29,8 +29,7 @@ public class LoginController {
 		return ulist;
 	}
 	
-	@GetMapping("/users")
-	@ResponseBody
+	@RequestMapping(value ="/login", method=RequestMethod.GET)
 	public String Login() {
 		return "index";
 	}
@@ -49,18 +48,16 @@ public class LoginController {
 		return "redirect:/profile";
 	}
 	
-	@GetMapping("/profile")
-	@ResponseBody
+	@RequestMapping(value="/profile", method=RequestMethod.GET)
 	public String profilePage() {
-		return "index";
+		return "test";
 	}
 	
-	@GetMapping("/signup")
-	@ResponseBody
+	@RequestMapping(value="/signup", method=RequestMethod.GET)
 	public String signup() {
 		return "index";
 	}
-	@PostMapping("/login")
+	@PostMapping("/signup")
 	public String signupUser(HttpServletRequest req) {
 		String username = req.getParameter("username");
 		String password = req.getParameter("username");
