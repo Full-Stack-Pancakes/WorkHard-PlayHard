@@ -1,13 +1,7 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-</div>
-<form>
-<app-login *ngIf="!issignup"></app-login>
-<button (click)='signup()' *ngIf="!issignup" class="btn btn-primary" id="signup">Sign Up</button>
-<br><br><br>
-<app-signup *ngIf="issignup"></app-signup>
-<button (click)='signup()' class="btn btn-success" id="blogin" *ngIf="issignup">Back to Login</button>
-</form>
+
+<app-login></app-login>
+<app-home></app-home>
+<app-profile></app-profile>
+<app-about></app-about>
+<app-tasks></app-tasks>
+

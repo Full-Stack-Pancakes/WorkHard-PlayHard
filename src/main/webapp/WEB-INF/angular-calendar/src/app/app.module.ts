@@ -1,20 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AboutComponent } from './about/about.component';
+import { TasksComponent } from './tasks/tasks.component';
+import { MaterialModule } from './material/material.module';
 import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
     LoginComponent,
-    SignupComponent
+    AppComponent,
+    HomeComponent,
+    ProfileComponent,
+    AboutComponent,
+    TasksComponent
   ],
   imports: [
-    BrowserModule,
-    FormsModule
+    BrowserModule, 
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
