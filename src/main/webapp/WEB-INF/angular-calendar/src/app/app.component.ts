@@ -6,10 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  issignup: boolean = false;
-  title = 'Auto Scheduling Calendar';
-
-  signup(){
-    this.issignup = !this.issignup;
-  }
+  title = 'app';
 }

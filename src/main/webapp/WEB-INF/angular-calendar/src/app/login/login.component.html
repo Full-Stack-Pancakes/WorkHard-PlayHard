@@ -1,10 +1,106 @@
-<h1 align="center">Test Calendar Login</h1>
-<div>
-	<form action="login" method="post">
-    <label for="username">Username: </label>
-    <input type="text" class="form-control col-6" id="username">
-    <label for="pwd">Password: </label>
-    <input type="password" class="form-control col-6" id="pwd">
-    <button class="btn btn-success" id="login">Login</button>
-    </form>
+<div fxLayoutAlign="center">
+    <mat-card class="card-form">
+        <mat-card-title>Sign In</mat-card-title>
+        <div class="signin-form" fxLayoutAlign="center">
+        <mat-form-field>
+            <input matInput placeholder="User Name" name="username" >
+        </mat-form-field>
+        <br>
+        </div>
+
+        <div class="signin-form" fxLayoutAlign="center">
+        <mat-form-field>
+            <input type="password" matInput placeholder="Password" name="password">
+        </mat-form-field>
+        <br>
+        </div>
+
+        <div fxLayoutAlign="center">
+            <button mat-button color="primary" >Sign in</button>
+        </div>
+    </mat-card>
 </div>
+      
+
+
+
+
+
+<div fxLayoutAlign="center">
+    <mat-card class="card-form">
+        <mat-card-title>Sign Up</mat-card-title>
+        <div class="signup-form" fxLayoutAlign="center">
+        <mat-form-field >
+            <input matInput placeholder="First Name" name="firstname">
+        </mat-form-field>
+        <br>
+        </div>
+
+        <div class="signup-form" fxLayoutAlign="center">
+        <mat-form-field>
+            <input matInput placeholder="Last Name" name="lastname">
+        </mat-form-field>
+        <br>
+        </div>
+
+        <div class="signup-form" fxLayoutAlign="center">
+        <mat-radio-group fxLayout="row"  fxLayoutGap="20px">
+                <mat-radio-button value="male">Male</mat-radio-button>
+                <mat-radio-button value="female">Female</mat-radio-button>
+        </mat-radio-group>
+        </div>
+
+
+        <div class="signup-form" fxLayoutAlign="center">
+        <mat-form-field>
+            <input matInput placeholder="User Name" name="username" >
+        </mat-form-field>
+        <br>
+        </div>
+
+        <div class="signup-form" fxLayoutAlign="center">
+        <mat-form-field>
+            <input type="password" matInput placeholder="Password" name="password">
+        </mat-form-field>
+        <br>
+        </div>
+
+        <div class="signup-form" fxLayoutAlign="center">
+        <mat-form-field>
+            <input type="password" matInput placeholder="Confirm Password" >
+        </mat-form-field>
+        <br>
+        </div>
+
+
+        <div class="signup-form" fxLayoutAlign="center">
+        <mat-form-field>
+            <input matInput placeholder="Email" name="email">
+        </mat-form-field>
+        <br>
+        </div>
+
+
+        <div class="signup-form" fxLayoutAlign="center">
+        <mat-form-field>
+            <input matInput placeholder="Phone Number" name="phone" >
+        </mat-form-field>
+        <br>
+        </div>
+
+        <div class="signup-form" fxLayoutAlign="center">
+        <mat-form-field >
+            <input matInput [matDatepicker]="picker" placeholder="Birth Date" name="birthdate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <br>
+        </div>
+        <br>
+
+        <div fxLayoutAlign="center">
+            <button mat-button color="primary" >Create account</button>
+        </div>
+    </mat-card>
+</div>
+      
