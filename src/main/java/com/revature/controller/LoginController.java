@@ -31,9 +31,10 @@ public class LoginController {
 	
 	@RequestMapping(value ="/login", method=RequestMethod.GET)
 	public String Login() {
-		return "index";
+		return "loginTest";
 	}
-	@PostMapping("/login")
+	@RequestMapping(value="login", method=RequestMethod.POST)
+	//@PostMapping("WorkHard-PlayHard/login")
 	public String LoginUser(HttpServletRequest req) {
 		String username = req.getParameter("username");
 		String password = req.getParameter("pwd");
@@ -44,31 +45,34 @@ public class LoginController {
 				userid = u.getUserid();
 			}
 		}
-		//set the sessions
+		req.setAttribute("userid", userid);
 		return "redirect:/profile";
 	}
 	
 	@RequestMapping(value="/profile", method=RequestMethod.GET)
+	//@CrossOrigin(origins="http://localhost:4200/")
 	public String profilePage() {
 		return "test";
 	}
 	
-	@RequestMapping(value="/signup", method=RequestMethod.GET)
+	@RequestMapping(value="signup", method=RequestMethod.GET)
 	public String signup() {
-		return "index";
+		return "signupTest";
 	}
-	@PostMapping("/signup")
+	@RequestMapping(value="signup", method=RequestMethod.POST)
+	@PostMapping("WorkHard-PlayHard/signup")
 	public String signupUser(HttpServletRequest req) {
 		String username = req.getParameter("username");
-		String password = req.getParameter("username");
-		String cpassword = req.getParameter("username");
-		String fname = req.getParameter("username");
-		String lname = req.getParameter("username");
-		String bday = req.getParameter("username");
+		System.out.println(username);
+		String password = req.getParameter("pwd");
+		String cpassword = req.getParameter("cpwd");
+		String fname = req.getParameter("firstname");
+		String lname = req.getParameter("lastname");
+		String bday = req.getParameter("birthday");
 		//Date birthday = bday;
-		String email = req.getParameter("username");
-		String phone = req.getParameter("username");
-		udi.createUser(new User(fname, lname, email, phone));
+		String email = req.getParameter("email");
+		String phone = req.getParameter("phone");
+		udi.createUser(new User(fname, lname, email, phone, password));
 		return "redirect:/login";
 	}
 }
