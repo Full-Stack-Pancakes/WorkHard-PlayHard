@@ -1,5 +1,6 @@
 public String addEvent(Event e){
    List<Event> tempevent;
+   tempevent.clear();
    EventDaoImpl edi = new EventDaoImpl();
    //check the event type to be static or movable
    if(e.eventtype == "static"){
@@ -25,7 +26,7 @@ public String addEvent(Event e){
                    else if (e1.getEventtype() == "movable"){
                        //addEventMock is similar to addEvent, but it is a mock up for the addEvent, where an event will be returned
                        //by recursively adding event until every event is added or the replaced event cannot replace any other event
-                       tempevent = addEventMock(e1);
+                       tempevent.addAll(addEventMock(e1));
                        if(tempevent.size() > 1){
                             collections.sort(tempevent, new EventCompare());
                        }
@@ -34,6 +35,7 @@ public String addEvent(Event e){
                            if (a <= 0){
                                return "This event can not be added, please modify your calendar";
                            }
+                           
                        }
                        //if all event is above priority on the added event, this will trigger
                        if (count == 1){
@@ -41,6 +43,7 @@ public String addEvent(Event e){
                             for(Event e2 : elist){
                                 //delete them from the database
                                 deleteEventById(e2.getEventid());
+                                elist.remove
                                 //add them back using the addEvent function
                                 addEvent(e2);
                             }
@@ -52,6 +55,12 @@ public String addEvent(Event e){
                    }
                }
                else {
+                   //if the event is less than the added event, remove it from tempevent, added to the list that needs to be solved
+                   for(Event e3 : tempevent){
+                    tempevent.remove(e3);
+                    elist.add(e3);
+                   }
+                    collections.sort(elist, new EventCompare());
                     edi.createEvent(e);
                     for(Event e2 : elist){
                         //delete them from the database
@@ -65,28 +74,87 @@ public String addEvent(Event e){
        }
    }
    else if (e.eventtype == "movable") {
-       if(check for free time between now and due time){
-           add the event
+       //find every event between now and the due time
+       Lise<Event> elist = edi.getEventByTimePeriod(e.getStarttime(), e.getDuetime());
+       //make a compare function that soley compares the time of each event starting
+       //and sort them by time, so we can find if there are periods of free time between 2 events for the new
+       //event to be added, not that sure about the specifics yet
+       collections.sort(elist, new EventTimeCompare());
+       //temp function check if this is free
+       if(isFree(e.getEventlength(), elist)){
+           edi.createEvent(e);
+           return "Event added successfully";
        }
-       else if(the event is movable and lower pri){
-           add the event
-           tempevent = the event being replaced;
-           addEvent(tempevent)
-           commit the changes
+       else if(!isFree(e.getEventlength(), elist)){
+           List<Event> elistmv = new ArrayList<Event>();
+           List<Event> elistst = new ArrayList<Event>();
+           List<Event> elistadd = new ArrayList<Event>();
+               for(Event e4 : elist){
+                   //seperate them into 2 lists, one is movable, one is static
+                   if(e4.getEventtype() == "movable"){
+                       elistmv.add(e4);
+                   }
+                   else if (e4.getEventtype() == "movable"){
+                       elistst.add(e4);
+                   }
+               }
+               //similar to event compare, just in the other order, lowest pri to highest
+               collections.sort(elistmv, new EventCompare2());
+               collections.sort(elistst, new EventCompare2());
+               for(Event e5 : elistmv){
+                   if(e5.getPriority() < e.getPriority()){
+                       elistmv.remove(e5);
+                       elist.remove(e5);
+                       elistadd.add(e5);
+                       if(isFree(e.getEventlength(), elist)){
+                           edi.createEvent(e);
+                           collections.sort(elistadd, new EventAdd());
+                           for(Event e6 : elistadd){
+                               addEvent(e6);
+                           }
+                           return "Event added successfully";
+                       }
+                   }
+                   else if (e5.getPriority() >= e.getPriority()){
+                       if(e5.getTimelength() < e.getTimelength()){
+                           tempevent.addAll(addEventMock(e5));
+                           collections.sort(tempevent, new EventCompare());
+                           for(Event e7 : tempevent){
+                               if (e5.getPriority() < e.getPriority()){
+                                   elist.remove(e7);
+                                   edi.createEvent(e);
+                                   addEvent(e7);
+                                   return "Event added successfully";
+                               }
+                               else{
+                                   return "This event can not be added, please modify your calendar";
+                               }
+                           }
+                       }
+                       else{
+                           return "This event can not be added, please modify your calendar";
+                       }
+                   }
+               }
+                for(Event e5 : elistst){
+                    if(e5.getPriority() < e.getPriority()){
+                        elistst.remove(e5);
+                       elist.remove(e5);
+                       elistadd.add(e5);
+                    }
+                    if(isFree(e.getEventlength(), elist)){
+                           edi.createEvent(e);
+                           collections.sort(elistadd, new EventAdd());
+                           for(Event e6 : elistadd){
+                               addEvent(e6);
+                           }
+                           return "Event added successfully";
+                     }
+                }
+        }
+       else{
+           return "This event can not be added, please modify your calendar";
        }
-       else if(event is movable, higher pri, and smaller time length){
-           tempevent = the event being replaced;
-           addEventMock(tempevent)
-           the compare the return with event e
-           if (e has higher pri){ commit it}
-           else{return this can't be done}
-       }
-       else if(static event with lower pri){
-           replace the event;
-           tempevent = the replaced event;
-           addEvent(tempevent);
-           
-       }
-       else{can't add the event}
+        
    }
 }
