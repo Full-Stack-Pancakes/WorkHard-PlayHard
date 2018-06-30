@@ -1,0 +1,92 @@
+public String addEvent(Event e){
+   List<Event> tempevent;
+   EventDaoImpl edi = new EventDaoImpl();
+   //check the event type to be static or movable
+   if(e.eventtype == "static"){
+       //this function should be added to the eventdaoimpl, to see if the time period is free, it will return an list
+       //if that period is free, then it will return an empty list, else it will return the event in the list
+       List<Event> elist = getEventByTimePeriod(e.getStarttime(), e.getStarttime().addTime(e.getTimelength()));
+       if(elist.isEmpty()){ 
+           edi.createEvent(e);
+           return "Event added successfully";
+       }
+       else {
+           //if more than 1 event is replaced, sort them based on event sort
+           if(elist.size() > 1){
+               collections.sort(elist, new EventCompare());
+           }
+           for (Event e1 : elist){
+               count = elist.size();
+               //compare the priority of events, starting from the highest priority
+               if(e1.getPriority() >= e.getPriority()){
+                   if(e1.getEventtype() == "static"){
+                       return "This event can not be added, please modify your calendar";
+                   }
+                   else if (e1.getEventtype() == "movable"){
+                       //addEventMock is similar to addEvent, but it is a mock up for the addEvent, where an event will be returned
+                       //by recursively adding event until every event is added or the replaced event cannot replace any other event
+                       tempevent = addEventMock(e1);
+                       if(tempevent.size() > 1){
+                            collections.sort(tempevent, new EventCompare());
+                       }
+                       for(Event e3 : tempevent){
+                           int a = compareTo(e, e3);
+                           if (a <= 0){
+                               return "This event can not be added, please modify your calendar";
+                           }
+                       }
+                       //if all event is above priority on the added event, this will trigger
+                       if (count == 1){
+                            edi.createEvent(e);
+                            for(Event e2 : elist){
+                                //delete them from the database
+                                deleteEventById(e2.getEventid());
+                                //add them back using the addEvent function
+                                addEvent(e2);
+                            }
+                            return "Event added successfully";
+                       }
+                       else {
+                           return "This event can not be added, please modify your calendar";
+                       }
+                   }
+               }
+               else {
+                    edi.createEvent(e);
+                    for(Event e2 : elist){
+                        //delete them from the database
+                        deleteEventById(e2.getEventid());
+                        //add them back using the addEvent function
+                        addEvent(e2);
+                    }
+                    return "Event added successfully";
+               }
+           }
+       }
+   }
+   else if (e.eventtype == "movable") {
+       if(check for free time between now and due time){
+           add the event
+       }
+       else if(the event is movable and lower pri){
+           add the event
+           tempevent = the event being replaced;
+           addEvent(tempevent)
+           commit the changes
+       }
+       else if(event is movable, higher pri, and smaller time length){
+           tempevent = the event being replaced;
+           addEventMock(tempevent)
+           the compare the return with event e
+           if (e has higher pri){ commit it}
+           else{return this can't be done}
+       }
+       else if(static event with lower pri){
+           replace the event;
+           tempevent = the replaced event;
+           addEvent(tempevent);
+           
+       }
+       else{can't add the event}
+   }
+}

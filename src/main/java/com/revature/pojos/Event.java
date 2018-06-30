@@ -2,12 +2,13 @@ package com.revature.pojos;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.Comparator;
 
 import javax.persistence.*;
 
 @Entity
 @Table
-public class Event implements Comparable<Event> {
+public class Event {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="eventSequence")
@@ -20,7 +21,7 @@ public class Event implements Comparable<Event> {
 	@Column
 	Time eventlength;
 	@Column
-	Time starttime;
+	Date starttime;
 	@Column
 	String eventtype;
 	@Column
@@ -37,7 +38,7 @@ public class Event implements Comparable<Event> {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Event(int priority, Time eventlength, Time starttime, String eventtype, Boolean splitable,
+	public Event(int priority, Time eventlength, Date starttime, String eventtype, Boolean splitable,
 			Time minlength, Time inputtime, String dayofweek, Date startdate) {
 		super();
 		this.priority = priority;
@@ -68,10 +69,10 @@ public class Event implements Comparable<Event> {
 	public void setEventlength(Time eventlength) {
 		this.eventlength = eventlength;
 	}
-	public Time getStarttime() {
+	public Date getStarttime() {
 		return starttime;
 	}
-	public void setStarttime(Time starttime) {
+	public void setStarttime(Date starttime) {
 		this.starttime = starttime;
 	}
 	public String getEventtype() {
@@ -117,18 +118,4 @@ public class Event implements Comparable<Event> {
 				+ starttime + ", eventtype=" + eventtype + ", splitable=" + splitable + ", minlength=" + minlength
 				+ ", inputtime=" + inputtime + ", dayofweek=" + dayofweek + ", startdate=" + startdate + "]";
 	}
-	@Override
-	public int compareTo(Event compareEvent) {
-		int cEventpriority = compareEvent.getPriority();
-		int result;
-		result = this.getPriority() - compareEvent.getPriority();
-		if(result == 0) {
-			Date cEventdate = compareEvent.getStartdate();
-			result = this.getStartdate().compareTo(cEventdate);
-			return result;
-		}
-		return result;
-	}
-	
-	
 }
