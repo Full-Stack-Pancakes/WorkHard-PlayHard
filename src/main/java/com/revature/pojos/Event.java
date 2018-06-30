@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table
-public class Event {
+public class Event implements Comparable<Event> {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="eventSequence")
@@ -116,6 +116,18 @@ public class Event {
 		return "Event [eventid=" + eventid + ", priority=" + priority + ", eventlength=" + eventlength + ", starttime="
 				+ starttime + ", eventtype=" + eventtype + ", splitable=" + splitable + ", minlength=" + minlength
 				+ ", inputtime=" + inputtime + ", dayofweek=" + dayofweek + ", startdate=" + startdate + "]";
+	}
+	@Override
+	public int compareTo(Event compareEvent) {
+		int cEventpriority = compareEvent.getPriority();
+		int result;
+		result = this.getPriority() - compareEvent.getPriority();
+		if(result == 0) {
+			Date cEventdate = compareEvent.getStartdate();
+			result = this.getStartdate().compareTo(cEventdate);
+			return result;
+		}
+		return result;
 	}
 	
 	
