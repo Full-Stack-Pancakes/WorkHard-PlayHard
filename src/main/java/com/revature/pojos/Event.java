@@ -2,6 +2,7 @@ package com.revature.pojos;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.Comparator;
 
 import javax.persistence.*;
 
@@ -20,7 +21,9 @@ public class Event {
 	@Column
 	Time eventlength;
 	@Column
-	Time starttime;
+	Date starttime;
+	@Column
+	Date duetime;
 	@Column
 	String eventtype;
 	@Column
@@ -37,12 +40,13 @@ public class Event {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Event(int priority, Time eventlength, Time starttime, String eventtype, Boolean splitable,
+	public Event(int priority, Time eventlength, Date starttime, Date duetime, String eventtype, Boolean splitable,
 			Time minlength, Time inputtime, String dayofweek, Date startdate) {
 		super();
 		this.priority = priority;
 		this.eventlength = eventlength;
 		this.starttime = starttime;
+		this.duetime = duetime;
 		this.eventtype = eventtype;
 		this.splitable = splitable;
 		this.minlength = minlength;
@@ -68,10 +72,10 @@ public class Event {
 	public void setEventlength(Time eventlength) {
 		this.eventlength = eventlength;
 	}
-	public Time getStarttime() {
+	public Date getStarttime() {
 		return starttime;
 	}
-	public void setStarttime(Time starttime) {
+	public void setStarttime(Date starttime) {
 		this.starttime = starttime;
 	}
 	public String getEventtype() {
@@ -110,13 +114,19 @@ public class Event {
 	public void setStartdate(Date startdate) {
 		this.startdate = startdate;
 	}
-	
+	public Date getDuetime() {
+		return duetime;
+	}
+	public void setDuetime(Date duetime) {
+		this.duetime = duetime;
+	}
 	@Override
 	public String toString() {
 		return "Event [eventid=" + eventid + ", priority=" + priority + ", eventlength=" + eventlength + ", starttime="
-				+ starttime + ", eventtype=" + eventtype + ", splitable=" + splitable + ", minlength=" + minlength
-				+ ", inputtime=" + inputtime + ", dayofweek=" + dayofweek + ", startdate=" + startdate + "]";
+				+ starttime + ", duetime=" + duetime + ", eventtype=" + eventtype + ", splitable=" + splitable
+				+ ", minlength=" + minlength + ", inputtime=" + inputtime + ", dayofweek=" + dayofweek + ", startdate="
+				+ startdate + "]";
 	}
-	
+
 	
 }
