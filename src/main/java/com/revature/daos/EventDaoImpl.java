@@ -2,6 +2,7 @@ package com.revature.daos;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.revature.pojos.Event;
 import com.revature.pojos.User;
+import com.revature.pojos.UserEvent;
 import com.revature.util.HibernateUtil;
 
 @Repository
@@ -65,6 +67,14 @@ public class EventDaoImpl implements EventDao {
 		return result;
 	}
 	
-	
+	@Override
+	public List<Integer> getEventIdByUserId(int id){
+		List<Integer> idlist = new ArrayList<Integer>();
+		Session session = HibernateUtil.getSession();
+		String hql = "select event_id from UserEvent where id =:userid";
+		Query query = session.createQuery(hql);
+		idlist = query.list();
+		return idlist;
+	}
 
 }
