@@ -10,6 +10,7 @@ import { TasksComponent} from '../tasks/tasks.component';
 
 const routes: Routes =[
   { path:"", component: HomeComponent },
+  { path:"home", component: HomeComponent },
   { path:"login", component: LoginComponent },
   { path:"profile", component: ProfileComponent },
   { path:"about", component: AboutComponent },

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule} from '@angular/forms';
+import { MatToolbarModule} from '@angular/material/toolbar';
 import {
   MatDatepickerModule, 
   MatFormFieldModule, 
@@ -18,6 +20,8 @@ import {
   MatButtonModule,
   MatIconModule,
   MatNativeDateModule,
+  
+  
   
 
 
@@ -42,7 +46,9 @@ import {
     MatIconModule,
     MatNativeDateModule,
     BrowserAnimationsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FormsModule,
+    MatToolbarModule
    
 
 
@@ -66,7 +72,10 @@ import {
     MatIconModule,
     MatNativeDateModule,
     BrowserAnimationsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FormsModule,
+    MatToolbarModule
+    
    
 
   ]
