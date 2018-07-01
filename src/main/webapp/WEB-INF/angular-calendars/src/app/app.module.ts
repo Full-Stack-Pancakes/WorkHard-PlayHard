@@ -8,6 +8,9 @@ import { AboutComponent } from './about/about.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { MaterialModule } from './material/material.module';
 import { LoginComponent } from './login/login.component';
+import { RoutingModule } from './routing/routing.module';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+
 
 @NgModule({
   declarations: [
@@ -16,11 +19,15 @@ import { LoginComponent } from './login/login.component';
     HomeComponent,
     ProfileComponent,
     AboutComponent,
-    TasksComponent
+    TasksComponent,
+    NavBarComponent
+
   ],
   imports: [
     BrowserModule, 
-    MaterialModule
+    MaterialModule,
+    RoutingModule,
+  
   ],
   providers: [],
   bootstrap: [AppComponent]
