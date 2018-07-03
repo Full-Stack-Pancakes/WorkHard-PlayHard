@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
-
-
 declare const gapi: any;
 
 
@@ -12,31 +9,15 @@ declare const gapi: any;
 })
 export class ProfileComponent implements OnInit {
 
- CLIENT_ID: string = '71981442606-teuh4dts215oti8e39nh91q5u43uj0bq.apps.googleusercontent.com'
- API_KEY: string = 'AIzaSyBQBa3p9q0qkknOuXNmA2saBvMDcl10mJI';
- DISCOVERY_DOCS: string[]= ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
- SCOPES: string = "https://www.googleapis.com/auth/calendar";
-  
-
+  fullname = gapi.auth2.getAuthInstance().currentUser.get().w3.ig
+  pictureurl = gapi.auth2.getAuthInstance().currentUser.get().w3.Paa
+  googleId =gapi.auth2.getAuthInstance().currentUser.get().getId();
+  firstname= gapi.auth2.getAuthInstance().currentUser.get().w3.ofa
+  lastname=gapi.auth2.getAuthInstance().currentUser.get().w3.wea
+  email=gapi.auth2.getAuthInstance().currentUser.get().w3.U3
   constructor() { }
-
-  ngOnInit() {
-    function hello(){console.log("HELO");}
-
-
-  }
-
-  handleClientLoad() {
-    gapi.load('client:auth2', ()=>{});
-  }
-
-
-  
-
-  
-
-
-
-
+  ngOnInit() {}
 
 }
+    
+

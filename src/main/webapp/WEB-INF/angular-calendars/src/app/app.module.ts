@@ -10,7 +10,7 @@ import { MaterialModule } from './material/material.module';
 import { LoginComponent } from './login/login.component';
 import { RoutingModule } from './routing/routing.module';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-
+import { InterceptorModule } from './interceptor/interceptor.module'
 
 @NgModule({
   declarations: [
@@ -20,7 +20,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     ProfileComponent,
     AboutComponent,
     TasksComponent,
-    NavBarComponent
+    NavBarComponent,
+    InterceptorModule
 
   ],
   imports: [

@@ -1,1 +1,85 @@
+{{eventtitle}}<br>
+{{eventlocation}}<br>
+{{eventdes}}<br>
+{{startdate}}<br>
+{{starttime}}<br>
+{{enddate}}<br>
+{{endtime}}<br>
+{{currenttz}}<br>
+<form #createevent = "ngForm" (ngSubmit)="onSubmit(createevent)" fxLayoutAlign="center">
+        <mat-card class="card-form">
+            <mat-card-title>Create Event</mat-card-title>
+            <div class="add-event" fxLayoutAlign="center">
+            <mat-form-field >
+                <input matInput placeholder="Event Title" name="eventtitle" [(ngModel)]="eventtitle">
+            </mat-form-field>
+            <br>
+            </div>
+
+            <div class="add-event" fxLayoutAlign="center">
+            <mat-form-field>
+                <input matInput placeholder="Event Location" name="eventlocation" [(ngModel)]="eventlocation">
+            </mat-form-field>
+            <br>
+            </div>
+
+            <div class="add-event" fxLayoutAlign="center">
+            <mat-form-field>
+                <input matInput placeholder="Event Description" name="eventdes" [(ngModel)]="eventdes">
+            </mat-form-field>
+            <br>
+            </div>
+
+
+
+            <div class="add-event" fxLayoutAlign="center">
+            <mat-form-field >
+                <input matInput [matDatepicker]="picker" placeholder="Start Date" name="startdate" [(ngModel)]="startdate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                    <input matInput placeholder="Start Time (Eg. 14:30:00)" name="starttime" [(ngModel)]="starttime">
+                </mat-form-field>
+            <br>
+            </div>
+            <br>
+
+            <div class="add-event" fxLayoutAlign="center">
+                    <mat-form-field >
+                        <input matInput [matDatepicker]="endpicker" placeholder="End Date" name="enddate" [(ngModel)]="enddate">
+                        <mat-datepicker-toggle matSuffix [for]="endpicker"></mat-datepicker-toggle>
+                        <mat-datepicker #endpicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field>
+                            <input matInput placeholder="End Time (Eg. 14:30:00)" name="endtime" [(ngModel)]="endtime">
+                    </mat-form-field>
+                    <br>
+                    </div>
+                    <br>
+
+                    <div class="add-event" fxLayoutAlign="center">
+                            <!-- <mat-select-group [(ngModel)]="currenttz">
+                                    <mat-radio-button *ngFor="let timezone of timezones" [value]="timezone">
+                                      {{timezone}}
+                                    </mat-s-button>
+                            </mat-select-group> -->
+                            <mat-form-field>
+                                    <mat-select placeholder="Time Zones" [(ngModel)]="currenttz" name="soemthing">
+                                      <mat-option *ngFor="let timezone of timezones" [value]="timezone" name="timezone">
+                                        {{timezone}}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                           
+                    </div>
+                    
+
+            <div fxLayoutAlign="center">
+                <button (click)="createEvent()" mat-raised-button color="primary" >Create Event</button>
+            </div>
+        </mat-card>
+</form>
+
+
 <iframe src="https://calendar.google.com/calendar/embed?src=evannara%40gmail.com&ctz=America%2FNew_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
