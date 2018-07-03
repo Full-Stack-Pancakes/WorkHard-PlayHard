@@ -2,64 +2,52 @@ package com.revature.daos;
 
 import java.util.List;
 
+
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.pojos.User;
+import com.revature.repositories.UserRepository;
 import com.revature.util.HibernateUtil;
 
-@Repository
+@Service
+@Transactional
 public class UserDaoImpl implements UserDao {
+	
+	@Autowired
+	UserRepository urepo;
 
 	@Override
 	public List<User> getUsers() {
-		
-		Session session = HibernateUtil.getSession();
-		String hql = "from User";
-		Query query = session.createQuery(hql);
-		List<User> allUsers = query.list();
-		return allUsers;
+		return urepo.findAll();
 	}
 
 	@Override
 	public User getUserById(int id) {
-		Session session = HibernateUtil.getSession();
-		User user = (User) session.get(User.class, id);
-		session.close();
+		return urepo.getOne(id);
+	}
+
+	@Override
+	public User createUser(User user) {
+		return urepo.save(user);
+	}
+
+	@Override
+	public User updateUser(User user) {
+		return urepo.save(user);
+	}
+
+	@Override
+	public User deleteUser(User user) {
+		urepo.delete(user);
 		return user;
-	}
-
-	@Override
-	public void createUser(User user) {
-		Session session = HibernateUtil.getSession();
-		Transaction transaction = session.beginTransaction();
-		session.save(user);
-		transaction.commit();
-		session.close();
-		
-	}
-
-	@Override
-	public void updateUser(User user) {
-		Session session = HibernateUtil.getSession();
-		Transaction transaction = session.beginTransaction();
-		session.update(user);
-		transaction.commit();
-		session.close();
-		
-	}
-
-	@Override
-	public int deleteUserById(int id) {
-		Session session = HibernateUtil.getSession();
-		String hql = "delete from User where id =:user_id";
-		Query query = session.createQuery(hql);
-		query.setParameter("user_id", id);
-		int result = query.executeUpdate();
-		return result;
 	}
 	
 }

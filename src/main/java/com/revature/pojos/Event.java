@@ -6,8 +6,12 @@ import java.util.Comparator;
 
 import javax.persistence.*;
 
+import org.springframework.stereotype.Component;
+
+@Component
 @Entity
 @Table
+//@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Event {
 	
 	@Id
@@ -31,17 +35,22 @@ public class Event {
 	@Column
 	Time minlength;
 	@Column
-	Time inputtime;
+	Date inputtime;
 	@Column
 	String dayofweek;
 	@Column
-	Date startdate;
+	String location;
+	@Column
+	String description;
+	@Column
+	String timezone;
+	
 	public Event() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Event(int priority, Time eventlength, Date starttime, Date duetime, String eventtype, Boolean splitable,
-			Time minlength, Time inputtime, String dayofweek, Date startdate) {
+			Time minlength, Date inputtime, String dayofweek, String location, String description, String timezone) {
 		super();
 		this.priority = priority;
 		this.eventlength = eventlength;
@@ -52,7 +61,9 @@ public class Event {
 		this.minlength = minlength;
 		this.inputtime = inputtime;
 		this.dayofweek = dayofweek;
-		this.startdate = startdate;
+		this.location = location;
+		this.description = description;
+		this.timezone = timezone;
 	}
 	public int getEventid() {
 		return eventid;
@@ -96,10 +107,10 @@ public class Event {
 	public void setMinlength(Time minlength) {
 		this.minlength = minlength;
 	}
-	public Time getInputtime() {
+	public Date getInputtime() {
 		return inputtime;
 	}
-	public void setInputtime(Time inputtime) {
+	public void setInputtime(Date inputtime) {
 		this.inputtime = inputtime;
 	}
 	public String getDayofweek() {
@@ -108,25 +119,37 @@ public class Event {
 	public void setDayofweek(String dayofweek) {
 		this.dayofweek = dayofweek;
 	}
-	public Date getStartdate() {
-		return startdate;
-	}
-	public void setStartdate(Date startdate) {
-		this.startdate = startdate;
-	}
 	public Date getDuetime() {
 		return duetime;
 	}
 	public void setDuetime(Date duetime) {
 		this.duetime = duetime;
 	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getTimezone() {
+		return timezone;
+	}
+	public void setTimezone(String timezone) {
+		this.timezone = timezone;
+	}
 	@Override
 	public String toString() {
 		return "Event [eventid=" + eventid + ", priority=" + priority + ", eventlength=" + eventlength + ", starttime="
 				+ starttime + ", duetime=" + duetime + ", eventtype=" + eventtype + ", splitable=" + splitable
-				+ ", minlength=" + minlength + ", inputtime=" + inputtime + ", dayofweek=" + dayofweek + ", startdate="
-				+ startdate + "]";
+				+ ", minlength=" + minlength + ", inputtime=" + inputtime + ", dayofweek=" + dayofweek + ", location="
+				+ location + ", description=" + description + ", timezone=" + timezone + "]";
 	}
-
+	
 	
 }

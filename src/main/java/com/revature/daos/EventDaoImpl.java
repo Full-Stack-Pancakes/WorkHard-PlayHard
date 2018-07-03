@@ -60,7 +60,7 @@ public class EventDaoImpl implements EventDao {
 	@Override
 	public int deleteEventById(int id) {
 		Session session = HibernateUtil.getSession();
-		String hql = "delete from Event where id =:event_id";
+		String hql = "delete from Event where EVENTID =:event_id";
 		Query query = session.createQuery(hql);
 		query.setParameter("event_id", id);
 		int result = query.executeUpdate();
@@ -71,10 +71,24 @@ public class EventDaoImpl implements EventDao {
 	public List<Integer> getEventIdByUserId(int id){
 		List<Integer> idlist = new ArrayList<Integer>();
 		Session session = HibernateUtil.getSession();
-		String hql = "select event_id from UserEvent where id =:userid";
+		String hql = "select event_id from UserEvent where USERID =:user_id";
 		Query query = session.createQuery(hql);
+		query.setParameter("user_id", id);
 		idlist = query.list();
 		return idlist;
 	}
 
+	@Override
+	public List<Event> getEventsByTimeFrame(Date sdate, Date dtime) {
+		List<Event> eventlist = new ArrayList<Event>();
+		Session session = HibernateUtil.getSession();
+		String hql = "from Event where starttime between :sdate and :dtime";
+		Query query = session.createQuery(hql);
+		query.setParameter("sdate", sdate);
+		query.setParameter("dtime", dtime);
+		eventlist = query.list();
+		return eventlist;
+	}
+
+	
 }

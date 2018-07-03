@@ -5,9 +5,14 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@Component
 @Entity
 @Table(name="CAL_USER")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class User {
 	
 	@Id

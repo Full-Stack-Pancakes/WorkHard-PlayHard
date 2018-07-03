@@ -9,7 +9,7 @@ public class EventCompare implements Comparator<Event> {
 		int result;
 		result = e1.getPriority() - e2.getPriority();
 		if(result == 0) {
-			result = e1.getStartdate().compareTo(e2.getStartdate());
+			result = e1.getStarttime().compareTo(e2.getStarttime());
 			return result;
 		}
 		return result;

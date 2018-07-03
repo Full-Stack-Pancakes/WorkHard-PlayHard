@@ -1,6 +1,9 @@
 package com.revature.controller;
 
 import java.sql.Date;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +17,7 @@ import com.revature.daos.UserDaoImpl;
 import com.revature.pojos.Event;
 import com.revature.pojos.User;
 
-@Controller
+@RestController
 public class LoginController {
 	
 	
@@ -55,24 +58,25 @@ public class LoginController {
 		return "test";
 	}
 	
-	@RequestMapping(value="signup", method=RequestMethod.GET)
-	public String signup() {
-		return "signupTest";
-	}
+//	@RequestMapping(value="signup", method=RequestMethod.GET)
+//	public String signup() {
+//		return "";
+//	}
 	@RequestMapping(value="signup", method=RequestMethod.POST)
 	@PostMapping("WorkHard-PlayHard/signup")
 	public String signupUser(HttpServletRequest req) {
 		String username = req.getParameter("username");
 		System.out.println(username);
-		String password = req.getParameter("pwd");
-		String cpassword = req.getParameter("cpwd");
+		String password = req.getParameter("password");
+		String cpassword = req.getParameter("confirmedpassword");
 		String fname = req.getParameter("firstname");
 		String lname = req.getParameter("lastname");
-		String bday = req.getParameter("birthday");
+		//String bday = req.getParameter("birthday");
 		//Date birthday = bday;
 		String email = req.getParameter("email");
 		String phone = req.getParameter("phone");
 		udi.createUser(new User(fname, lname, email, phone, password));
 		return "redirect:/login";
 	}
+	
 }
