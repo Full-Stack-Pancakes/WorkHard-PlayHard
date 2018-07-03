@@ -1,12 +1,13 @@
-{{eventtitle}}<br>
-{{eventlocation}}<br>
-{{eventdes}}<br>
-{{startdate}}<br>
-{{starttime}}<br>
-{{enddate}}<br>
-{{endtime}}<br>
-{{currenttz}}<br>
-<form #createevent = "ngForm" (ngSubmit)="onSubmit(createevent)" fxLayoutAlign="center">
+{{eventtitle}},
+{{eventlocation}}
+{{eventdes}}
+
+{{begindate}}
+{{currenttz}}
+{{duedate}}
+{{currenttz}}
+
+<form #createevent = "ngForm" fxLayoutAlign="center">
         <mat-card class="card-form">
             <mat-card-title>Create Event</mat-card-title>
             <div class="add-event" fxLayoutAlign="center">
@@ -18,16 +19,17 @@
 
             <div class="add-event" fxLayoutAlign="center">
             <mat-form-field>
-                <input matInput placeholder="Event Location" name="eventlocation" [(ngModel)]="eventlocation">
+                <textarea rows="6" matInput #description maxlength=300 placeholder="Event Description" name="eventdes" [(ngModel)]="eventdes"></textarea>
+                <mat-hint align="end">{{description.value.length}} / 300</mat-hint>
             </mat-form-field>
             <br>
             </div>
 
             <div class="add-event" fxLayoutAlign="center">
-            <mat-form-field>
-                <input matInput placeholder="Event Description" name="eventdes" [(ngModel)]="eventdes">
-            </mat-form-field>
-            <br>
+                    <mat-form-field>
+                        <input matInput placeholder="Event Location" name="eventlocation" [(ngModel)]="eventlocation">
+                    </mat-form-field>
+                    <br>
             </div>
 
 
@@ -38,9 +40,14 @@
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
+    
             <mat-form-field>
-                    <input matInput placeholder="Start Time (Eg. 14:30:00)" name="starttime" [(ngModel)]="starttime">
-                </mat-form-field>
+                    <mat-select placeholder="Start Time" [(ngModel)]="starttime" name="starttime">
+                        <mat-option *ngFor="let time of times" [value]="time" name="time">
+                        {{time}}
+                        </mat-option>
+                    </mat-select>
+            </mat-form-field>
             <br>
             </div>
             <br>
@@ -52,7 +59,11 @@
                         <mat-datepicker #endpicker></mat-datepicker>
                     </mat-form-field>
                     <mat-form-field>
-                            <input matInput placeholder="End Time (Eg. 14:30:00)" name="endtime" [(ngModel)]="endtime">
+                            <mat-select placeholder="End Time" [(ngModel)]="endtime" name="endtime">
+                                <mat-option *ngFor="let time of times" [value]="time" name="time">
+                                {{time}}
+                                </mat-option>
+                            </mat-select>
                     </mat-form-field>
                     <br>
                     </div>
@@ -65,12 +76,12 @@
                                     </mat-s-button>
                             </mat-select-group> -->
                             <mat-form-field>
-                                    <mat-select placeholder="Time Zones" [(ngModel)]="currenttz" name="soemthing">
-                                      <mat-option *ngFor="let timezone of timezones" [value]="timezone" name="timezone">
-                                        {{timezone}}
-                                      </mat-option>
-                                    </mat-select>
-                                  </mat-form-field>
+                                <mat-select placeholder="Time Zones" [(ngModel)]="currenttz" name="soemthing">
+                                    <mat-option *ngFor="let timezone of timezones" [value]="timezone" name="timezone">
+                                    {{timezone}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
                            
                     </div>
                     
