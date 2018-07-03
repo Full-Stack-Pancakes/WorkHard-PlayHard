@@ -21,13 +21,15 @@ import { InterceptorModule } from './interceptor/interceptor.module'
     AboutComponent,
     TasksComponent,
     NavBarComponent,
-    InterceptorModule
+   
+   
 
   ],
   imports: [
     BrowserModule, 
     MaterialModule,
     RoutingModule,
+    InterceptorModule,
   
   ],
   providers: [],
