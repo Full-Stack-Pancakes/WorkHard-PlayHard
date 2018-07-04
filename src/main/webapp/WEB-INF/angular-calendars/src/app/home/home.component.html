@@ -1,13 +1,4 @@
-{{eventtitle}},
-{{eventlocation}}
-{{eventdes}}
-
-{{begindate}}
-{{currenttz}}
-{{duedate}}
-{{currenttz}}
-
-<form #createevent = "ngForm" fxLayoutAlign="center">
+<form #createevent = "ngForm"  (ngSubmit)= "onSubmit(createevent)" fxLayoutAlign="center">
         <mat-card class="card-form">
             <mat-card-title>Create Event</mat-card-title>
             <div class="add-event" fxLayoutAlign="center">
@@ -19,8 +10,8 @@
 
             <div class="add-event" fxLayoutAlign="center">
             <mat-form-field>
-                <textarea rows="6" matInput #description maxlength=300 placeholder="Event Description" name="eventdes" [(ngModel)]="eventdes"></textarea>
-                <mat-hint align="end">{{description.value.length}} / 300</mat-hint>
+                <textarea style="border-right:solid 0.5px silver " rows="6" matInput #description maxlength=300 placeholder="Event Description" name="eventdes" [(ngModel)]="eventdes"></textarea>
+                <mat-hint align="end">{{description.value.length}} / 250</mat-hint>
             </mat-form-field>
             <br>
             </div>
@@ -28,11 +19,10 @@
             <div class="add-event" fxLayoutAlign="center">
                     <mat-form-field>
                         <input matInput placeholder="Event Location" name="eventlocation" [(ngModel)]="eventlocation">
+                        <!-- <input ngx-google-places-autocomplete matInput placeholder="Event Location" name="eventlocation" [(ngModel)]="eventlocation"> -->
                     </mat-form-field>
                     <br>
             </div>
-
-
 
             <div class="add-event" fxLayoutAlign="center">
             <mat-form-field >
@@ -70,11 +60,6 @@
                     <br>
 
                     <div class="add-event" fxLayoutAlign="center">
-                            <!-- <mat-select-group [(ngModel)]="currenttz">
-                                    <mat-radio-button *ngFor="let timezone of timezones" [value]="timezone">
-                                      {{timezone}}
-                                    </mat-s-button>
-                            </mat-select-group> -->
                             <mat-form-field>
                                 <mat-select placeholder="Time Zones" [(ngModel)]="currenttz" name="soemthing">
                                     <mat-option *ngFor="let timezone of timezones" [value]="timezone" name="timezone">
@@ -89,8 +74,144 @@
             <div fxLayoutAlign="center">
                 <button (click)="createEvent()" mat-raised-button color="primary" >Create Event</button>
             </div>
+
+
+
+            
+            <div fxLayoutAlign="center">
+                    <button (click)="deleteEvent()" mat-raised-button color="primary" >Delete Event</button>
+            </div>
+
+            <div fxLayoutAlign="center">
+                    <button (click)="populateEvents()" mat-raised-button color="accent" >Display Events</button>
+            </div>
+            <div fxLayoutAlign="center">
+                    <button (click)="afterEvents()" mat-raised-button color="accent" >After Events</button>
+            </div>
         </mat-card>
 </form>
 
 
-<iframe src="https://calendar.google.com/calendar/embed?src=evannara%40gmail.com&ctz=America%2FNew_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+<table [ngClass]="tableStyle" style="width:100%">
+    <thead>
+    <tr>
+        
+        <th>TITLE</th>
+        <th>LOCATION</th>
+        <th>DESCRIPTION</th>
+        <th>START DATE TIME</th>
+        <th>END DATE TIME</th>
+       
+    </tr>
+    </thead>
+    <tr *ngFor="let event of googleevents">
+        <td> {{event.summary}}</td>
+        <td> {{event.location}}</td>
+        <td> {{event.description}}</td>
+        <td> {{event.start.dateTime}}</td>
+        <td> {{event.end.dateTime}}</td>
+        <div fxLayoutAlign="center">
+                <button mat-mini-fab (click)="editEvent(event.id)" mat-raised-button color="primary" ><mat-icon>edit</mat-icon></button>
+            </div>
+        <div fxLayoutAlign="center">
+            <button mat-mini-fab (click)="deleteEvents(event.id)" mat-raised-button color="warn" ><mat-icon>delete</mat-icon></button>
+        </div>
+
+        <div fxLayoutAlign="center">
+                <button mat-mini-fab (click)="populateEvent(event.id)" mat-raised-button color="primary" ><mat-icon>person</mat-icon></button>
+            </div>
+            <div fxLayoutAlign="center">
+                    <button mat-mini-fab (click)="afterEvent()" mat-raised-button color="primary" >after event</button>
+                </div>
+
+    </tr>
+ 
+</table>
+
+             
+
+
+
+
+<form fxLayoutAlign="center" *ngIf="isEdit">
+        <mat-card class="card-form">
+            <mat-card-title>Edit Event</mat-card-title>
+                <div class="add-event" fxLayoutAlign="center">
+                    <mat-form-field >
+                        <input matInput placeholder="Event Title" name="eventtitleEdit"  value={{googleevent.summary}} [(ngModel)]="eventtitle">
+                    </mat-form-field>
+                    <br>
+                </div>
+
+          <div class="add-event" fxLayoutAlign="center">
+                    <mat-form-field>
+                        <textarea style="border-right:solid 0.5px silver " rows="6" matInput #description maxlength=300 placeholder="Event Description" name="eventdes"  [(ngModel)]="eventdes"></textarea>
+                        <mat-hint align="end">{{description.value.length}} / 250</mat-hint>
+                    </mat-form-field>
+                    <br>
+            </div>
+            <div class="add-event" fxLayoutAlign="center">
+                    <mat-form-field>
+                       
+                       <input ngx-google-places-autocomplete matInput placeholder="Event Location" name="eventlocation"  [(ngModel)]="eventlocation">
+                    </mat-form-field>
+                    <br>
+            </div>
+
+             <div class="add-event" fxLayoutAlign="center">
+                <mat-form-field >
+                    <input matInput [matDatepicker]="pickerEdit" placeholder="Start Date" name="startdate"  [(ngModel)]="startdate">
+                    <mat-datepicker-toggle matSuffix [for]="pickerEdit"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerEdit></mat-datepicker>
+                </mat-form-field>
+    
+                <mat-form-field>
+                        <mat-select placeholder="Start Time" [(ngModel)]="starttime" name="starttime">
+                            <mat-option *ngFor="let time of times" [value]="time" name="time">
+                            {{time}}
+                            </mat-option>
+                        </mat-select>
+                </mat-form-field>
+                <br>
+            </div>
+            <br>
+
+<!--
+            <div class="add-event" fxLayoutAlign="center">
+                    <mat-form-field >
+                        <input matInput [matDatepicker]="endpickerEdit" placeholder="End Date" name="enddate" value={{enddate}} [(ngModel)]="enddate">
+                        <mat-datepicker-toggle matSuffix [for]="endpickerEdit"></mat-datepicker-toggle>
+                        <mat-datepicker #endpickerEdit></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field>
+                            <mat-select placeholder="End Time" value={{endtime}} [(ngModel)]="endtime" name="endtime">
+                                <mat-option *ngFor="let time of times" [value]="time" name="time">
+                                {{time}}
+                                </mat-option>
+                            </mat-select>
+                    </mat-form-field>
+                    <br>
+            </div>
+            <br>
+
+            <div class="add-event" fxLayoutAlign="center">
+                    <mat-form-field>
+                        <mat-select placeholder="Time Zones" value={{currenttz}} [(ngModel)]="currenttz" name="soemthing">
+                            <mat-option *ngFor="let timezone of timezones" [value]="timezone" name="timezone">
+                            {{timezone}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    
+            </div>   -->
+        
+
+
+            <div fxLayoutAlign="center">
+                <button (click)="editEvent()" mat-raised-button color="primary" >Edit Event</button>
+            </div>
+
+        </mat-card>
+        </form>
+
+

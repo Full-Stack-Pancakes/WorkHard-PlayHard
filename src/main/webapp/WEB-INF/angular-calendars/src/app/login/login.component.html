@@ -1,3 +1,7 @@
+<div fxLayoutAlign="end">
+<button (click)="signInGoogle()">Sign In via Google</button>
+<button (click)="signOutGoogle()">Sign Out</button>
+</div>
 <form #signinForm="ngForm" (ngSubmit)= "onSubmit(signinForm)" fxLayoutAlign="center">
    
         <mat-card class="card-form">
@@ -23,8 +27,9 @@
         </mat-card>
 </form>
 
-<button (click)="signInGoogle()">Sign In via Google</button>
-<button (click)="signOutGoogle()">Sign Out</button>
+
+
+
       
 
 
@@ -62,7 +67,7 @@
             <br>
             </div>
 
-            <div class="signup-form" fxLayoutAlign="center">
+            <!-- <div class="signup-form" fxLayoutAlign="center">
             <mat-form-field>
                 <input type="password" matInput placeholder="Password" name="password">
             </mat-form-field>
@@ -74,7 +79,7 @@
                 <input type="password" matInput placeholder="Confirm Password" name="confirmedPassword">
             </mat-form-field>
             <br>
-            </div>
+            </div> -->
 
 
             <div class="signup-form" fxLayoutAlign="center">

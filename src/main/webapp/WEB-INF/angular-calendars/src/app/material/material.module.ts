@@ -20,6 +20,7 @@ import {
   MatButtonModule,
   MatIconModule,
   MatNativeDateModule,
+  MatTableModule,
   
   
   
@@ -48,7 +49,8 @@ import {
     BrowserAnimationsModule,
     FlexLayoutModule,
     FormsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTableModule
    
 
 
@@ -74,7 +76,8 @@ import {
     BrowserAnimationsModule,
     FlexLayoutModule,
     FormsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTableModule
     
    
 
