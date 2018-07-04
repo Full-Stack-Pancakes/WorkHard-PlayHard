@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +17,7 @@ import { MaterialModule } from './material/material.module';
 import { LoginComponent } from './login/login.component';
 import { RoutingModule } from './routing/routing.module';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { InterceptorModule } from './interceptor/interceptor.module'
+//import { InterceptorModule } from './interceptor/interceptor.module'
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { InterceptorModule } from './interceptor/interceptor.module'
     BrowserModule, 
     MaterialModule,
     RoutingModule,
-    InterceptorModule,
+    HttpClientModule,
     CommonModule,
     FormsModule,
     NgbModalModule.forRoot(),

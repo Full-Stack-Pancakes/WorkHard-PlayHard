@@ -6,7 +6,7 @@ import 'rxjs/add/operator/do';
 @Injectable()
 export class HttpsRequestInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const dupReq = req.clone({ headers: req.headers.set('Access-Control-Allow-Origin','https://localhost:8080/user') });
+    const dupReq = req.clone({ headers: req.headers.set('Access-Control-Allow-Origin','https://localhost:4200') });
     return next.handle(dupReq);
   }
 };

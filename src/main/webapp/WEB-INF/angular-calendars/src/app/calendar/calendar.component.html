@@ -112,8 +112,10 @@
 
 <br><br><br>
 
-<!-- <h3>
+<!-- EDIT, MODIFY, AND DELETE EVENTS -->
+<h3>
   Edit events
+  <!-- BY DEFAULT THIS BUTTON ADDS AN EVENT ON THE CURRENT DAY -->
   <button
     class="btn btn-primary pull-right"
     (click)="addEvent()">
@@ -122,8 +124,8 @@
   <div class="clearfix"></div>
 </h3>
 
+<!-- TABLE OF EVENTS -->
 <table class="table table-bordered">
-
   <thead>
     <tr>
       <th>Title</th>
@@ -157,6 +159,20 @@
           (change)="refresh.next()">
       </td>
       <td>
+        <mat-form-field>
+          <input matInput [matDatepicker]="startDatepicker">
+          <mat-datepicker-toggle matSuffix [for]="startDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #startDatepicker></mat-datepicker>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field>
+          <input matInput [matDatepicker]="endDatepicker">
+          <mat-datepicker-toggle matSuffix [for]="endDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #endDatepicker></mat-datepicker>
+        </mat-form-field>
+      </td>
+      <td>
         <button
           class="btn btn-danger"
           (click)="events.splice(index, 1); refresh.next()">
@@ -166,4 +182,4 @@
     </tr>
   </tbody>
 
-</table> -->
+</table>
