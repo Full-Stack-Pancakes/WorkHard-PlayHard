@@ -46,20 +46,19 @@ public class Event {
 	@Column
 	String timezone;
 	
-	@ManyToOne
-	@JoinColumn(name="USERID", nullable = false)
-	User user = new User();
+//	@ManyToOne
+//	@JoinColumn(name="USERID")
+//	User user;
 	
 	public Event() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Event(int eventid, String location, String description, int priority, String eventtype, Date inputtime,
+	public Event(String location, String description, int priority, String eventtype, Date inputtime,
 			Date starttime, Date duetime, Time eventlength, Boolean splitable, Time minlength, String dayofweek,
 			String timezone, User user) {
 		super();
-		this.eventid = eventid;
 		this.location = location;
 		this.description = description;
 		this.priority = priority;
@@ -72,7 +71,7 @@ public class Event {
 		this.minlength = minlength;
 		this.dayofweek = dayofweek;
 		this.timezone = timezone;
-		this.user = user;
+		//this.user = user;
 	}
 
 	public int getEventid() {
@@ -153,18 +152,15 @@ public class Event {
 	public void setTimezone(String timezone) {
 		this.timezone = timezone;
 	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
+//	public User getUser() {
+//		return user;
+//	} ", userid=" + user + 
 
 	@Override
 	public String toString() {
 		return "Event [eventid=" + eventid + ", location=" + location + ", description=" + description + ", priority="
 				+ priority + ", eventtype=" + eventtype + ", inputtime=" + inputtime + ", starttime=" + starttime
 				+ ", duetime=" + duetime + ", eventlength=" + eventlength + ", splitable=" + splitable + ", minlength="
-				+ minlength + ", dayofweek=" + dayofweek + ", timezone=" + timezone + ", user=" + user + "]";
+				+ minlength + ", dayofweek=" + dayofweek + ", timezone=" + timezone + "]";
 	}
 }

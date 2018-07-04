@@ -57,9 +57,14 @@ public class UserController {
 		return udi.updateUser(user);
 	}
 	
-	@DeleteMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public User deleteUser(@RequestBody User user) {
-		udi.deleteUser(user);
-		return user;
+	@DeleteMapping(value="/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public User deleteUser(@PathVariable("id") int id) throws UserNotFoundException{
+		User user = udi.getUserById(id);
+		if(user != null) {
+			udi.deleteUser(user);
+			return user;
+		} else {
+			throw new UserNotFoundException();
+		}
 	}
 }

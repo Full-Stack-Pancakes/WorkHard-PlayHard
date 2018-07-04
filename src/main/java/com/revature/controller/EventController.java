@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.daos.EventDaoImpl;
 import com.revature.exception.EventNotFoundException;
+import com.revature.exception.UserNotFoundException;
 import com.revature.pojos.Event;
+import com.revature.pojos.User;
 
 @CrossOrigin(origins="http://localhost:4200")
 @RestController
@@ -51,9 +53,15 @@ public class EventController {
 		return edi.updateEvent(event);
 	}
 	
-	@DeleteMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public Event deleteEvent(@RequestBody Event event) {
-		return edi.deleteEvent(event);
+	@DeleteMapping(value="/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public Event deleteEvent(@PathVariable("id") int id) throws EventNotFoundException {
+		Event event = edi.getEventById(id);
+		if(event != null) {
+			edi.deleteEvent(event);
+			return event;
+		} else {
+			throw new EventNotFoundException();
+		}
 	}
 }
 	
