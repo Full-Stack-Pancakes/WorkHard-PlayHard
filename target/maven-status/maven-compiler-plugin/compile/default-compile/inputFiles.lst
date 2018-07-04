@@ -1,6 +1,7 @@
 C:\Users\julia\Desktop\Full-Stack-Pancakes\WorkHard-PlayHard\src\main\java\com\revature\controller\EventController.java
 C:\Users\julia\Desktop\Full-Stack-Pancakes\WorkHard-PlayHard\src\main\java\com\revature\pojos\Event.java
 C:\Users\julia\Desktop\Full-Stack-Pancakes\WorkHard-PlayHard\src\main\java\com\revature\controller\UserController.java
+C:\Users\julia\Desktop\Full-Stack-Pancakes\WorkHard-PlayHard\src\main\java\com\revature\exception\EventNotFoundException.java
 C:\Users\julia\Desktop\Full-Stack-Pancakes\WorkHard-PlayHard\src\main\java\com\revature\pojos\EventCompare2.java
 C:\Users\julia\Desktop\Full-Stack-Pancakes\WorkHard-PlayHard\src\main\java\com\revature\pojos\EventTimeCompare.java
 C:\Users\julia\Desktop\Full-Stack-Pancakes\WorkHard-PlayHard\src\main\java\com\revature\util\HibernateUtil.java

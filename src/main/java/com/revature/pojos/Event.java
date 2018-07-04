@@ -21,50 +21,60 @@ public class Event {
 	int eventid;
 	
 	@Column
+	String location;
+	@Column
+	String description;
+	@Column
 	int priority;
 	@Column
-	Time eventlength;
+	String eventtype;
+	@Column
+	Date inputtime;
+	
 	@Column
 	Date starttime;
 	@Column
 	Date duetime;
 	@Column
-	String eventtype;
+	Time eventlength;
 	@Column
 	Boolean splitable;
 	@Column
 	Time minlength;
 	@Column
-	Date inputtime;
-	@Column
 	String dayofweek;
 	@Column
-	String location;
-	@Column
-	String description;
-	@Column
 	String timezone;
+	
+	@ManyToOne
+	@JoinColumn(name="USERID", nullable = false)
+	User user = new User();
 	
 	public Event() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Event(int priority, Time eventlength, Date starttime, Date duetime, String eventtype, Boolean splitable,
-			Time minlength, Date inputtime, String dayofweek, String location, String description, String timezone) {
+
+	public Event(int eventid, String location, String description, int priority, String eventtype, Date inputtime,
+			Date starttime, Date duetime, Time eventlength, Boolean splitable, Time minlength, String dayofweek,
+			String timezone, User user) {
 		super();
-		this.priority = priority;
-		this.eventlength = eventlength;
-		this.starttime = starttime;
-		this.duetime = duetime;
-		this.eventtype = eventtype;
-		this.splitable = splitable;
-		this.minlength = minlength;
-		this.inputtime = inputtime;
-		this.dayofweek = dayofweek;
+		this.eventid = eventid;
 		this.location = location;
 		this.description = description;
+		this.priority = priority;
+		this.eventtype = eventtype;
+		this.inputtime = inputtime;
+		this.starttime = starttime;
+		this.duetime = duetime;
+		this.eventlength = eventlength;
+		this.splitable = splitable;
+		this.minlength = minlength;
+		this.dayofweek = dayofweek;
 		this.timezone = timezone;
+		this.user = user;
 	}
+
 	public int getEventid() {
 		return eventid;
 	}
@@ -143,13 +153,18 @@ public class Event {
 	public void setTimezone(String timezone) {
 		this.timezone = timezone;
 	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public String toString() {
-		return "Event [eventid=" + eventid + ", priority=" + priority + ", eventlength=" + eventlength + ", starttime="
-				+ starttime + ", duetime=" + duetime + ", eventtype=" + eventtype + ", splitable=" + splitable
-				+ ", minlength=" + minlength + ", inputtime=" + inputtime + ", dayofweek=" + dayofweek + ", location="
-				+ location + ", description=" + description + ", timezone=" + timezone + "]";
+		return "Event [eventid=" + eventid + ", location=" + location + ", description=" + description + ", priority="
+				+ priority + ", eventtype=" + eventtype + ", inputtime=" + inputtime + ", starttime=" + starttime
+				+ ", duetime=" + duetime + ", eventlength=" + eventlength + ", splitable=" + splitable + ", minlength="
+				+ minlength + ", dayofweek=" + dayofweek + ", timezone=" + timezone + ", user=" + user + "]";
 	}
-	
-	
 }

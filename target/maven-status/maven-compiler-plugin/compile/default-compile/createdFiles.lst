@@ -13,3 +13,4 @@ com\revature\pojos\User.class
 com\revature\daos\EventDaoImpl.class
 com\revature\pojos\EventCompare.class
 com\revature\controller\UserController.class
+com\revature\exception\EventNotFoundException.class

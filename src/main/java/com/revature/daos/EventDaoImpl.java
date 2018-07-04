@@ -21,11 +21,10 @@ public class EventDaoImpl implements EventDao {
 
 	@Override
 	public List<Event> getEvents() {
-		Session session = HibernateUtil.getSession();
-		String hql = "from Event";
-		Query query = session.createQuery(hql);
-		List<Event> allEvents = query.list();
-		return allEvents;
+		Session s = HibernateUtil.getSession();
+		List<Event> elist = s.createQuery("from Event").list();
+		s.close();
+		return elist;
 	}
 
 	@Override
@@ -38,46 +37,35 @@ public class EventDaoImpl implements EventDao {
 
 
 	@Override
-	public void createEvent(Event event) {
+	public Event createEvent(Event event) {
 		Session session = HibernateUtil.getSession();
 		Transaction transaction = session.beginTransaction();
 		session.save(event);
 		transaction.commit();
 		session.close();
-		
+		return event;
 	}
 
 	@Override
-	public void updateEvent(Event event) {
+	public Event updateEvent(Event event) {
 		Session session = HibernateUtil.getSession();
 		Transaction transaction = session.beginTransaction();
 		session.update(event);
 		transaction.commit();
 		session.close();
-		
+		return event;
 	}
 
 	@Override
-	public int deleteEventById(int id) {
+	public Event deleteEvent(Event event) {
 		Session session = HibernateUtil.getSession();
-		String hql = "delete from Event where EVENTID =:event_id";
-		Query query = session.createQuery(hql);
-		query.setParameter("event_id", id);
-		int result = query.executeUpdate();
-		return result;
+		Transaction transaction = session.beginTransaction();
+		session.delete(event);
+		transaction.commit();
+		session.close();
+		return event;
 	}
 	
-	@Override
-	public List<Integer> getEventIdByUserId(int id){
-		List<Integer> idlist = new ArrayList<Integer>();
-		Session session = HibernateUtil.getSession();
-		String hql = "select event_id from UserEvent where USERID =:user_id";
-		Query query = session.createQuery(hql);
-		query.setParameter("user_id", id);
-		idlist = query.list();
-		return idlist;
-	}
-
 	@Override
 	public List<Event> getEventsByTimeFrame(Date sdate, Date dtime) {
 		List<Event> eventlist = new ArrayList<Event>();
@@ -89,6 +77,4 @@ public class EventDaoImpl implements EventDao {
 		eventlist = query.list();
 		return eventlist;
 	}
-
-	
 }
