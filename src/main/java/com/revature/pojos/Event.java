@@ -21,6 +21,8 @@ public class Event {
 	int eventid;
 	
 	@Column
+	String summary;
+	@Column
 	String location;
 	@Column
 	String description;
@@ -46,19 +48,20 @@ public class Event {
 	@Column
 	String timezone;
 	
-//	@ManyToOne
-//	@JoinColumn(name="USERID")
-//	User user;
+	@ManyToOne
+	@JoinColumn(name="USERID")
+	User user;
 	
 	public Event() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Event(String location, String description, int priority, String eventtype, Date inputtime,
+	public Event(String summary, String location, String description, int priority, String eventtype, Date inputtime,
 			Date starttime, Date duetime, Time eventlength, Boolean splitable, Time minlength, String dayofweek,
 			String timezone, User user) {
 		super();
+		this.summary = summary;
 		this.location = location;
 		this.description = description;
 		this.priority = priority;
@@ -71,7 +74,7 @@ public class Event {
 		this.minlength = minlength;
 		this.dayofweek = dayofweek;
 		this.timezone = timezone;
-		//this.user = user;
+		this.user = user;
 	}
 
 	public int getEventid() {
@@ -152,15 +155,26 @@ public class Event {
 	public void setTimezone(String timezone) {
 		this.timezone = timezone;
 	}
-//	public User getUser() {
-//		return user;
-//	} ", userid=" + user + 
+	public User getUser() {
+		return user;
+	}
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
 
 	@Override
 	public String toString() {
-		return "Event [eventid=" + eventid + ", location=" + location + ", description=" + description + ", priority="
-				+ priority + ", eventtype=" + eventtype + ", inputtime=" + inputtime + ", starttime=" + starttime
-				+ ", duetime=" + duetime + ", eventlength=" + eventlength + ", splitable=" + splitable + ", minlength="
-				+ minlength + ", dayofweek=" + dayofweek + ", timezone=" + timezone + "]";
-	}
+		return "Event [eventid=" + eventid + ", summary=" + summary + ", location=" + location + ", description="
+				+ description + ", priority=" + priority + ", eventtype=" + eventtype + ", inputtime=" + inputtime
+				+ ", starttime=" + starttime + ", duetime=" + duetime + ", eventlength=" + eventlength + ", splitable="
+				+ splitable + ", minlength=" + minlength + ", dayofweek=" + dayofweek + ", timezone=" + timezone
+				+ ", user=" + user + "]";
+	} 
+	
+	
 }

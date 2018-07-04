@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Component
 @Entity
 @Table(name="CAL_USER")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class User {
 	
 	@Id
@@ -32,9 +31,9 @@ public class User {
 	@Column
 	String password;
 	
-//	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
-//	List<Event> events;
-//	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
+	List<Event> events;
+	
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -58,7 +57,7 @@ public class User {
 		this.email = email;
 		this.phone = phone;
 		this.password = password;
-		//this.events = events;
+		this.events = events;
 	}
 
 	public int getUserid() {
@@ -101,17 +100,17 @@ public class User {
 		this.phone = phone;
 	}
 
-//	public List<Event> getEvents() {
-//		return events;
-//	}
-//
-//	public void setEvents(List<Event> events) {
-//		this.events = events;
-//	}
-//	
-//	public void addEvents(Event e) {
-//		this.events.add(e);
-//	} ", events=" + events + 
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+	
+	public void addEvents(Event e) {
+		this.events.add(e);
+	} 
 	
 	public String getPassword() {
 		return password;
@@ -124,7 +123,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userid=" + userid + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email
-				+ ", phone=" + phone + ", password=" + password + "]";
+				+ ", phone=" + phone + ", password=" + password + ", events=" + events + "]";
 	}
 	
 }
