@@ -21,6 +21,10 @@ import {
   CalendarEventAction,
   CalendarEventTimesChangedEvent
 } from 'angular-calendar';
+import { HttpClient } from '@angular/common/http';
+import { Event } from '../Event';
+import { Time } from '@angular/common';
+import { CalendarService } from '../calendar.service';
 
 const colors: any = {
   red: {
@@ -45,6 +49,8 @@ const colors: any = {
 })
 export class CalendarComponent {
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
+
+
 
   view: string = 'month';
 
@@ -72,6 +78,25 @@ export class CalendarComponent {
   ];
 
   refresh: Subject<any> = new Subject();
+
+    // TEST DATA
+  myEvents: Event[] = [
+    // {
+    //   location: 'my house',
+    //   description: 'study angular for 2 hrs',
+    //   priority: 1,
+    //   eventtype: 'required',
+    //   splitable: true,
+    //   dayofweek: 'Wednesday',
+    //   timezone: 'default',
+    //   userid: 5,
+    //   inputtime: null,
+    //   duetime: null,
+    //   starttime: null,
+    //   eventlength: null,
+    //   minlength: null
+    // }
+  ];
 
   events: CalendarEvent[] = [
     {
@@ -109,7 +134,14 @@ export class CalendarComponent {
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal) {}
+  constructor(private modal: NgbModal, private httpClient: HttpClient, private calendarService : CalendarService) {}
+
+  ngOnInit() {
+    this.calendarService.getEventById(2).then(
+      (data) => this.myEvents.push(data));
+    console.log(this.myEvents);
+  }
+
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -141,6 +173,7 @@ export class CalendarComponent {
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
+  // ADDS NEW EVENT TO CURRENT, FULL DAY BY DEFAULT
   addEvent(): void {
     this.events.push({
       title: 'New event',
