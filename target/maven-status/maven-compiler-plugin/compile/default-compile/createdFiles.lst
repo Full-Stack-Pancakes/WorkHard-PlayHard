@@ -8,7 +8,6 @@ com\revature\util\HibernateUtil.class
 com\revature\daos\UserDao.class
 com\revature\pojos\EventTimeCompare.class
 com\revature\daos\UserDaoImpl.class
-com\revature\controller\LoginController.class
 com\revature\pojos\Event.class
 com\revature\pojos\User.class
 com\revature\daos\EventDaoImpl.class

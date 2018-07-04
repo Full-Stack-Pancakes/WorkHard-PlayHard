@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import com.revature.daos.UserDaoImpl;
 import com.revature.exception.UserNotFoundException;
 import com.revature.pojos.User;
 
+//@CrossOrigin(origins="http://localhost:4200", maxAge = 4800)
 @RestController // takes the place of @Controller and @ResponseBody on each of the methods
 @RequestMapping("/users") // maps every request in this class
 public class UserController {
@@ -28,7 +30,9 @@ public class UserController {
 	
 	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<User> getUsers(){
-		return udi.getUsers();
+		List<User> ulist = udi.getUsers();
+		System.out.println(ulist);
+		return ulist;
 	}
 	
 	@GetMapping(value="/{id}",produces=MediaType.APPLICATION_JSON_VALUE)

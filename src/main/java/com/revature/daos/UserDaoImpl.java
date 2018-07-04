@@ -2,51 +2,62 @@ package com.revature.daos;
 
 import java.util.List;
 
-
-
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.pojos.User;
-import com.revature.repositories.UserRepository;
 import com.revature.util.HibernateUtil;
 
-@Service
-@Transactional
+
+@Repository
 public class UserDaoImpl implements UserDao {
 	
-	@Autowired
-	UserRepository urepo;
-
 	@Override
 	public List<User> getUsers() {
-		return urepo.findAll();
+		Session s = HibernateUtil.getSession();
+		List<User> ulist = s.createQuery("from User").list();
+		s.close();
+		return ulist;
 	}
 
 	@Override
 	public User getUserById(int id) {
-		return urepo.getOne(id);
+		Session s = HibernateUtil.getSession();
+		User u = (User) s.get(User.class, id);
+		s.close();
+		return u;
 	}
 
 	@Override
 	public User createUser(User user) {
-		return urepo.save(user);
+		Session s = HibernateUtil.getSession();
+		Transaction tx = s.beginTransaction();
+		s.save(user);
+		tx.commit();
+		s.close();
+		return user;
 	}
 
 	@Override
 	public User updateUser(User user) {
-		return urepo.save(user);
+		Session session = HibernateUtil.getSession();
+		Transaction transaction = session.beginTransaction();
+		session.update(user);
+		transaction.commit();
+		session.close();
+		return user;
 	}
 
 	@Override
 	public User deleteUser(User user) {
-		urepo.delete(user);
+		Session session = HibernateUtil.getSession();
+		Transaction transaction = session.beginTransaction();
+		session.delete(user);
+		transaction.commit();
+		session.close();
 		return user;
 	}
 	

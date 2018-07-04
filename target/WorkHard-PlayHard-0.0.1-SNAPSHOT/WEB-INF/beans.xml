@@ -12,15 +12,16 @@
 	<mvc:annotation-driven></mvc:annotation-driven>
 	
 	<!-- set a location for our static resource retrieval -->
-	<mvc:resources location="/WEB-INF/angular-calendar/src/" mapping="/angular-calendar/src/**"></mvc:resources>
+	<mvc:resources location="/WEB-INF/static/" mapping="/static/**"></mvc:resources>
 	
 	<!-- set up our view resolver -->
 	<bean name="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
-			<value>/angular-calendar/src/</value>
+			<value>/static/</value>
 		</property>
 		<property name="suffix">
 			<value>.html</value>	
 		</property>
 	</bean>
-</beans> 
+
+</beans>

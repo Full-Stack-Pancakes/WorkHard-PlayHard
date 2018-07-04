@@ -2,6 +2,8 @@ package com.revature.daos;
 
 import java.util.List;
 
+import javax.jws.WebService;
+
 import com.revature.pojos.User;
 
 public interface UserDao {

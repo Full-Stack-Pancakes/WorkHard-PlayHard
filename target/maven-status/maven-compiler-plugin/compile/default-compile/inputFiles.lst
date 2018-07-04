@@ -4,10 +4,10 @@ C:\Users\julia\Desktop\Full-Stack-Pancakes\WorkHard-PlayHard\src\main\java\com\r
 C:\Users\julia\Desktop\Full-Stack-Pancakes\WorkHard-PlayHard\src\main\java\com\revature\pojos\EventCompare2.java
 C:\Users\julia\Desktop\Full-Stack-Pancakes\WorkHard-PlayHard\src\main\java\com\revature\pojos\EventTimeCompare.java
 C:\Users\julia\Desktop\Full-Stack-Pancakes\WorkHard-PlayHard\src\main\java\com\revature\util\HibernateUtil.java
-C:\Users\julia\Desktop\Full-Stack-Pancakes\WorkHard-PlayHard\src\main\java\com\revature\controller\LoginController.java
 C:\Users\julia\Desktop\Full-Stack-Pancakes\WorkHard-PlayHard\src\main\java\com\revature\daos\EventDao.java
 C:\Users\julia\Desktop\Full-Stack-Pancakes\WorkHard-PlayHard\src\main\java\com\revature\daos\EventDaoImpl.java
 C:\Users\julia\Desktop\Full-Stack-Pancakes\WorkHard-PlayHard\src\main\java\com\revature\pojos\UserEvent.java
+C:\Users\julia\Desktop\Full-Stack-Pancakes\WorkHard-PlayHard\src\main\java\com\revature\filter\SimpleCORSFilter.java
 C:\Users\julia\Desktop\Full-Stack-Pancakes\WorkHard-PlayHard\src\main\java\com\revature\daos\UserDao.java
 C:\Users\julia\Desktop\Full-Stack-Pancakes\WorkHard-PlayHard\src\main\java\com\revature\util\Driver.java
 C:\Users\julia\Desktop\Full-Stack-Pancakes\WorkHard-PlayHard\src\main\java\com\revature\pojos\EventCompare.java
