@@ -24,28 +24,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  // onSubmit(form: NgForm)
-  // {
-  //   console.log(form);
-  //   console.log(form.value.username);
-  //   console.log(form.value.password)
-
-  // }
-
-  // onSubmit(form: NgForm)
-  // {
-  //   console.log(form);
-  //   console.log(form.value.username);
-  //   console.log(form.value.password);
-  //   this.calendarService.getUserByEmail(form.value.username).then(
-  //     (data) => this.user.password = data.password
-  //   );
-  //   console.log(this.user.password)
-  //   if(this.user.password == form.value.password){
-  //     console.log(true);
-  //   }
-  // }
-
   onSubmit(form: NgForm)
   {
     this.calendarService.getUsers().then(
@@ -61,27 +39,6 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  // signInGoogle() 
-  // {
-  //   gapi.load('client:auth2', ()=>
-  //   {
-  //     console.log("HINNIN");
-  //     gapi.client.init
-  //     ({
-  //     apiKey: this.API_KEY,
-  //     clientId: this.CLIENT_ID,
-  //     discoveryDocs: this.DISCOVERY_DOCS,
-  //     scope: this.SCOPES  
-  //     });
-  //     gapi.auth2.getAuthInstance().signIn();
-      
-  //   })
-  // }
-  // signOutGoogle(){
-  //   gapi.auth2.getAuthInstance().signOut();
-  //   console.log("LOGOUT>>");
-  // }
-
   onSubmit2(form: NgForm){
     this.user = {
       firstname: form.value.firstname,
@@ -95,5 +52,26 @@ export class LoginComponent implements OnInit {
     var aa = JSON.parse(JSON.stringify(this.user));
     console.log(aa);
     this.calendarService.createUser(aa);
+  }
+
+  signInGoogle() 
+  {
+    gapi.load('client:auth2', ()=>
+    {
+      console.log("HINNIN");
+      gapi.client.init
+      ({
+      apiKey: this.API_KEY,
+      clientId: this.CLIENT_ID,
+      discoveryDocs: this.DISCOVERY_DOCS,
+      scope: this.SCOPES  
+      });
+      gapi.auth2.getAuthInstance().signIn();
+      
+    })
+  }
+  signOutGoogle(){
+    gapi.auth2.getAuthInstance().signOut();
+    console.log("LOGOUT>>");
   }
 }

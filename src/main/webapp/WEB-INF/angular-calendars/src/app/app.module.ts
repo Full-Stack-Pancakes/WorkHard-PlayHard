@@ -17,7 +17,7 @@ import { MaterialModule } from './material/material.module';
 import { LoginComponent } from './login/login.component';
 import { RoutingModule } from './routing/routing.module';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-//import { InterceptorModule } from './interceptor/interceptor.module'
+import {GooglePlaceModule} from 'ngx-google-places-autocomplete'
 
 @NgModule({
   declarations: [
@@ -29,13 +29,13 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     TasksComponent,
     NavBarComponent,
     CalendarComponent
-   
 
   ],
   imports: [
     BrowserModule, 
     MaterialModule,
     RoutingModule,
+    GooglePlaceModule,
     HttpClientModule,
     CommonModule,
     FormsModule,

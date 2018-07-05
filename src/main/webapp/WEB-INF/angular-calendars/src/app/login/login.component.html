@@ -1,3 +1,7 @@
+<div fxLayoutAlign="end">
+<button (click)="signInGoogle()">Sign In via Google</button>
+<button (click)="signOutGoogle()">Sign Out</button>
+</div>
 <form #signinForm="ngForm" (ngSubmit)= "onSubmit(signinForm)" fxLayoutAlign="center">
    
     <mat-card class="card-form">
