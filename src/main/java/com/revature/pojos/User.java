@@ -5,7 +5,11 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@Component
 @Entity
 @Table(name="CAL_USER")
 public class User {
@@ -26,12 +30,6 @@ public class User {
 	String phone;
 	@Column
 	String password;
-	
-	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinTable(	name="USER_EVENT",
-				joinColumns = {@JoinColumn(name="USERID") },
-				inverseJoinColumns = {@JoinColumn(name="EVENTID")} )
-	List<Event> events = new ArrayList<Event>();
 	
 	public User() {
 		super();
@@ -86,18 +84,6 @@ public class User {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
-	public List<Event> getEvents() {
-		return events;
-	}
-
-	public void setEvents(List<Event> events) {
-		this.events = events;
-	}
-	
-	public void addEvents(Event e) {
-		this.events.add(e);
-	}
 	
 	public String getPassword() {
 		return password;
@@ -110,7 +96,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userid=" + userid + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email
-				+ ", phone=" + phone + ", password=" + password + ", events=" + events + "]";
+				+ ", phone=" + phone + ", password=" + password + "]";
 	}
 	
 }

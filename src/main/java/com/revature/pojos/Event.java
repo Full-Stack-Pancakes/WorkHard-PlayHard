@@ -6,6 +6,9 @@ import java.util.Comparator;
 
 import javax.persistence.*;
 
+import org.springframework.stereotype.Component;
+
+@Component
 @Entity
 @Table
 public class Event {
@@ -17,43 +20,62 @@ public class Event {
 	int eventid;
 	
 	@Column
+	String summary;
+	@Column
+	String location;
+	@Column
+	String description;
+	@Column
 	int priority;
 	@Column
-	Time eventlength;
+	String eventtype;
+	@Column
+	Date inputtime;
+	
 	@Column
 	Date starttime;
 	@Column
 	Date duetime;
 	@Column
-	String eventtype;
+	Time eventlength;
 	@Column
 	Boolean splitable;
 	@Column
 	Time minlength;
 	@Column
-	Time inputtime;
-	@Column
 	String dayofweek;
 	@Column
-	Date startdate;
+	String timezone;
+	
+	@ManyToOne
+	@JoinColumn(name="USERID")
+	User user;
+	
 	public Event() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Event(int priority, Time eventlength, Date starttime, Date duetime, String eventtype, Boolean splitable,
-			Time minlength, Time inputtime, String dayofweek, Date startdate) {
+
+	public Event(String summary, String location, String description, int priority, String eventtype, Date inputtime,
+			Date starttime, Date duetime, Time eventlength, Boolean splitable, Time minlength, String dayofweek,
+			String timezone, User user) {
 		super();
+		this.summary = summary;
+		this.location = location;
+		this.description = description;
 		this.priority = priority;
-		this.eventlength = eventlength;
+		this.eventtype = eventtype;
+		this.inputtime = inputtime;
 		this.starttime = starttime;
 		this.duetime = duetime;
-		this.eventtype = eventtype;
+		this.eventlength = eventlength;
 		this.splitable = splitable;
 		this.minlength = minlength;
-		this.inputtime = inputtime;
 		this.dayofweek = dayofweek;
-		this.startdate = startdate;
+		this.timezone = timezone;
+		this.user = user;
 	}
+
 	public int getEventid() {
 		return eventid;
 	}
@@ -96,10 +118,10 @@ public class Event {
 	public void setMinlength(Time minlength) {
 		this.minlength = minlength;
 	}
-	public Time getInputtime() {
+	public Date getInputtime() {
 		return inputtime;
 	}
-	public void setInputtime(Time inputtime) {
+	public void setInputtime(Date inputtime) {
 		this.inputtime = inputtime;
 	}
 	public String getDayofweek() {
@@ -108,25 +130,50 @@ public class Event {
 	public void setDayofweek(String dayofweek) {
 		this.dayofweek = dayofweek;
 	}
-	public Date getStartdate() {
-		return startdate;
-	}
-	public void setStartdate(Date startdate) {
-		this.startdate = startdate;
-	}
 	public Date getDuetime() {
 		return duetime;
 	}
 	public void setDuetime(Date duetime) {
 		this.duetime = duetime;
 	}
-	@Override
-	public String toString() {
-		return "Event [eventid=" + eventid + ", priority=" + priority + ", eventlength=" + eventlength + ", starttime="
-				+ starttime + ", duetime=" + duetime + ", eventtype=" + eventtype + ", splitable=" + splitable
-				+ ", minlength=" + minlength + ", inputtime=" + inputtime + ", dayofweek=" + dayofweek + ", startdate="
-				+ startdate + "]";
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getTimezone() {
+		return timezone;
+	}
+	public void setTimezone(String timezone) {
+		this.timezone = timezone;
+	}
+	public User getUser() {
+		return user;
 	}
 
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
+	@Override
+	public String toString() {
+		return "Event [eventid=" + eventid + ", summary=" + summary + ", location=" + location + ", description="
+				+ description + ", priority=" + priority + ", eventtype=" + eventtype + ", inputtime=" + inputtime
+				+ ", starttime=" + starttime + ", duetime=" + duetime + ", eventlength=" + eventlength + ", splitable="
+				+ splitable + ", minlength=" + minlength + ", dayofweek=" + dayofweek + ", timezone=" + timezone
+				+ ", user=" + user + "]";
+	} 
+	
 	
 }
