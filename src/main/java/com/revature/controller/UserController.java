@@ -43,8 +43,7 @@ public class UserController {
 			return udi.getUserById(id);
 		} else {
 			throw new UserNotFoundException();
-		}
-		
+		}	
 	}
 	
 	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)

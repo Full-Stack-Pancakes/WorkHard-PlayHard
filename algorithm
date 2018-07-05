@@ -1,5 +1,6 @@
-public String addEvent(Event e){
+public Event addEvent(Event e){
    List<Event> tempevent;
+   Event ex = null;
    tempevent.clear();
    EventDaoImpl edi = new EventDaoImpl();
    //check the event type to be static or movable
@@ -9,7 +10,7 @@ public String addEvent(Event e){
        List<Event> elist = getEventByTimePeriod(e.getStarttime(), e.getStarttime().addTime(e.getTimelength()));
        if(elist.isEmpty()){ 
            edi.createEvent(e);
-           return "Event added successfully";
+           return null;
        }
        else {
            //if more than 1 event is replaced, sort them based on event sort
@@ -18,10 +19,10 @@ public String addEvent(Event e){
            }
            for (Event e1 : elist){
                count = elist.size();
-               //compare the priority of events, starting from the highest priority
+               //compare the priority of events, starting from the lowest priority
                if(e1.getPriority() >= e.getPriority()){
                    if(e1.getEventtype() == "static"){
-                       return "This event can not be added, please modify your calendar";
+                       return e;
                    }
                    else if (e1.getEventtype() == "movable"){
                        //addEventMock is similar to addEvent, but it is a mock up for the addEvent, where an event will be returned
@@ -33,7 +34,7 @@ public String addEvent(Event e){
                        for(Event e3 : tempevent){
                            int a = compareTo(e, e3);
                            if (a <= 0){
-                               return "This event can not be added, please modify your calendar";
+                               return e;
                            }
                            
                        }
@@ -45,12 +46,12 @@ public String addEvent(Event e){
                                 deleteEventById(e2.getEventid());
                                 elist.remove
                                 //add them back using the addEvent function
-                                addEvent(e2);
+                                ex = addEvent(e2);
                             }
-                            return "Event added successfully";
+                            return ex;
                        }
                        else {
-                           return "This event can not be added, please modify your calendar";
+                           return e;
                        }
                    }
                }
@@ -66,9 +67,9 @@ public String addEvent(Event e){
                         //delete them from the database
                         deleteEventById(e2.getEventid());
                         //add them back using the addEvent function
-                        addEvent(e2);
+                        ex = addEvent(e2);
                     }
-                    return "Event added successfully";
+                    return ex;
                }
            }
        }
@@ -76,14 +77,14 @@ public String addEvent(Event e){
    else if (e.eventtype == "movable") {
        //find every event between now and the due time
        Lise<Event> elist = edi.getEventByTimePeriod(e.getStarttime(), e.getDuetime());
-       //make a compare function that soley compares the time of each event starting
+       //make a compare function that solely compares the time of each event starting
        //and sort them by time, so we can find if there are periods of free time between 2 events for the new
        //event to be added, not that sure about the specifics yet
        collections.sort(elist, new EventTimeCompare());
        //temp function check if this is free
        if(isFree(e.getEventlength(), elist)){
            edi.createEvent(e);
-           return "Event added successfully";
+           return ex;
        }
        else if(!isFree(e.getEventlength(), elist)){
            List<Event> elistmv = new ArrayList<Event>();
@@ -110,9 +111,9 @@ public String addEvent(Event e){
                            edi.createEvent(e);
                            collections.sort(elistadd, new EventAdd());
                            for(Event e6 : elistadd){
-                               addEvent(e6);
+                               ex = addEvent(e6);
                            }
-                           return "Event added successfully";
+                           return ex;
                        }
                    }
                    else if (e5.getPriority() >= e.getPriority()){
@@ -123,16 +124,16 @@ public String addEvent(Event e){
                                if (e5.getPriority() < e.getPriority()){
                                    elist.remove(e7);
                                    edi.createEvent(e);
-                                   addEvent(e7);
-                                   return "Event added successfully";
+                                   ex = addEvent(e7);
+                                   return ex;
                                }
                                else{
-                                   return "This event can not be added, please modify your calendar";
+                                   return e;
                                }
                            }
                        }
                        else{
-                           return "This event can not be added, please modify your calendar";
+                           return e;
                        }
                    }
                }
@@ -146,14 +147,14 @@ public String addEvent(Event e){
                            edi.createEvent(e);
                            collections.sort(elistadd, new EventAdd());
                            for(Event e6 : elistadd){
-                               addEvent(e6);
+                               ex = addEvent(e6);
                            }
-                           return "Event added successfully";
+                           return ex;
                      }
                 }
         }
        else{
-           return "This event can not be added, please modify your calendar";
+           return e;
        }
         
    }
