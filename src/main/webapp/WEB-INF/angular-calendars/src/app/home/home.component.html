@@ -1,4 +1,5 @@
 <form #createevent = "ngForm"  (ngSubmit)= "onSubmit(createevent)" fxLayoutAlign="center">
+
         <mat-card class="card-form">
             <mat-card-title>Create Event</mat-card-title>
             <div class="add-event" fxLayoutAlign="center">
@@ -60,6 +61,7 @@
                     <br>
 
                     <div class="add-event" fxLayoutAlign="center">
+
                             <mat-form-field>
                                 <mat-select placeholder="Time Zones" [(ngModel)]="currenttz" name="soemthing">
                                     <mat-option *ngFor="let timezone of timezones" [value]="timezone" name="timezone">
@@ -76,7 +78,6 @@
             </div>
 
 
-
             
             <div fxLayoutAlign="center">
                     <button (click)="deleteEvent()" mat-raised-button color="primary" >Delete Event</button>
@@ -88,8 +89,10 @@
             <div fxLayoutAlign="center">
                     <button (click)="afterEvents()" mat-raised-button color="accent" >After Events</button>
             </div>
+
         </mat-card>
 </form>
+
 
 
 <table [ngClass]="tableStyle" style="width:100%">
@@ -214,4 +217,7 @@
         </mat-card>
         </form>
 
+
+
+<iframe src="https://calendar.google.com/calendar/embed?src=evannara%40gmail.com&ctz=America%2FNew_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 

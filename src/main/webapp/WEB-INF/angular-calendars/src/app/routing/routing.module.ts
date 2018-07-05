@@ -6,6 +6,7 @@ import { AboutComponent} from '../about/about.component';
 import { HomeComponent} from '../home/home.component';
 import { LoginComponent} from '../login/login.component';
 import { TasksComponent} from '../tasks/tasks.component';
+import { CalendarComponent } from '../calendar/calendar.component';
 
 
 const routes: Routes =[
@@ -15,6 +16,7 @@ const routes: Routes =[
   { path:"profile", component: ProfileComponent },
   { path:"about", component: AboutComponent },
   { path:"tasks", component: TasksComponent },
+  { path:"calendar", component: CalendarComponent}
 ]
 
 @NgModule({

@@ -20,8 +20,6 @@ public class UserController {
 	@Autowired
 	UserDaoImpl udi;
 	
-	@GetMapping("/users")
-	@ResponseBody
 	public List<User> getUsers(){
 		ulist = udi.getUsers();
 		return ulist;
