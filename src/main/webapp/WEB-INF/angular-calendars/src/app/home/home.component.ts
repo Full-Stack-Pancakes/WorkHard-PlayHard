@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-declare const gapi;
-
+import { Component, OnInit, Input } from '@angular/core';
+import { Globals } from '../global';
 declare const gapi;
 
 @Component({
@@ -10,7 +9,7 @@ declare const gapi;
 })
 export class HomeComponent implements OnInit {
 
-  isEdit: Boolean=false;
+
   googleevents: any;
   googleevent: any;
   myevent:any;
@@ -26,23 +25,26 @@ export class HomeComponent implements OnInit {
   duedate: String;
   new_event: any;
 
-  constructor() { }
+
+  constructor(private global: Globals) { }
 
 
  
   editEvent(id)
   {
 
+    this.begindate = this.startdate.getFullYear()+'-'+(this.startdate.getMonth()+1).toString()+'-'+ this.startdate.getDate()+'T'+this.starttime+':00';
+    this.duedate = this.enddate.getFullYear()+'-'+(this.enddate.getMonth()+1).toString()+'-'+ this.enddate.getDate()+'T'+this.endtime+':00';
 
     this.populateEvent(id);
     console.log(this.googleevent);
-    this.isEdit=true;
+    
      this.eventtitle=this.googleevent.summary;
      this.eventlocation=this.googleevent.location;
      this.eventdes=this.googleevent.description;
-     this.begindate=this.googleevent.start.dateTime;
-     this.currenttz=this.googleevent.start.timeZone;
-     this.duedate=this.googleevent.end.dateTime;
+    //  this.begindate=this.googleevent.start.dateTime;
+    //  this.currenttz=this.googleevent.start.timeZone;
+    //  this.duedate=this.googleevent.end.dateTime;
     // this.new_event = {
     //   'summary': this.eventtitle,
     //   'location': this.eventlocation,
@@ -60,6 +62,26 @@ export class HomeComponent implements OnInit {
     //     'calendarId': 'primary','eventId': id,
     //      'resource': this.new_event}).execute();
   
+  }
+
+  saveEditEvent(id)
+  {
+    this.new_event = {
+      'summary': this.eventtitle,
+      'location': this.eventlocation,
+      'description': this.eventdes,
+      'start': {
+        'dateTime': this.begindate,
+        'timeZone': this.currenttz
+      },
+      'end': {
+        'dateTime': this.duedate,
+        'timeZone': this.currenttz
+      }}
+
+     gapi.client.calendar.events.update({
+         'calendarId': 'primary','eventId': id,
+         'resource': this.new_event}).execute();
   }
   createEvent()
   {
@@ -115,6 +137,8 @@ export class HomeComponent implements OnInit {
     });
   }
 
+
+
   populateEvent(id){
     
     gapi.client.calendar.events.get({"calendarId": 'primary', "eventId": id}).then((data)=>{this.googleevent=data.result; console.log(this.googleevent);});
@@ -122,6 +146,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+
+
     
   }
   currenttz: String;

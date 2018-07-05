@@ -3,6 +3,9 @@ import { NgForm} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { CalendarService } from '../calendar.service';
 import { User } from '../User';
+import { Router} from '@angular/router'; 
+import { Globals} from '../global'
+
 
 declare const gapi;
 @Component({
@@ -11,6 +14,8 @@ declare const gapi;
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  isSignIn: any=5;
+  
 
   CLIENT_ID: string = '71981442606-teuh4dts215oti8e39nh91q5u43uj0bq.apps.googleusercontent.com'
   API_KEY: string = 'AIzaSyBQBa3p9q0qkknOuXNmA2saBvMDcl10mJI';
@@ -19,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   user: User;
 
-  constructor(private httpClient: HttpClient, private calendarService : CalendarService) { }
+  constructor(private httpClient: HttpClient, private calendarService : CalendarService, private router: Router, private global: Globals) { }
 
   ngOnInit() {
   }
@@ -31,7 +36,10 @@ export class LoginComponent implements OnInit {
         for(let i of data){
           if(i.email == form.value.username){
             if(i.password == form.value.password){
-              console.log("logged in")
+              console.log("logged in");
+               this.global.isSignIn=true;
+              this.router.navigate(['/home', '']);
+              
             }
           }
         }
@@ -67,11 +75,18 @@ export class LoginComponent implements OnInit {
       scope: this.SCOPES  
       });
       gapi.auth2.getAuthInstance().signIn();
+      this.global.myNum='99';
+      this.global.setSignIn(true);
+      console.log("logged in")
+      this.router.navigate(['/home']);
+      
+
       
     })
   }
   signOutGoogle(){
     gapi.auth2.getAuthInstance().signOut();
+    this.global.setSignIn(false);
     console.log("LOGOUT>>");
   }
 }

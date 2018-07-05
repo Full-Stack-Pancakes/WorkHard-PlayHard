@@ -7,22 +7,25 @@ import { HomeComponent} from '../home/home.component';
 import { LoginComponent} from '../login/login.component';
 import { TasksComponent} from '../tasks/tasks.component';
 import { CalendarComponent } from '../calendar/calendar.component';
+import { LogoutComponent } from '../logout/logout.component';
+import { PagNotFoundComponent} from '../pag-not-found/pag-not-found.component';
 
 
 const routes: Routes =[
-  { path:"", component: HomeComponent },
+  { path:"", component: LoginComponent },
   { path:"home", component: HomeComponent },
   { path:"login", component: LoginComponent },
   { path:"profile", component: ProfileComponent },
   { path:"about", component: AboutComponent },
   { path:"tasks", component: TasksComponent },
-  { path:"calendar", component: CalendarComponent}
+  { path:"calendar", component: CalendarComponent},
+  { path:"logout", component: LogoutComponent},
+  { path:"**", component: PagNotFoundComponent}
 ]
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes)
-
   ],
   exports: [RouterModule]
 

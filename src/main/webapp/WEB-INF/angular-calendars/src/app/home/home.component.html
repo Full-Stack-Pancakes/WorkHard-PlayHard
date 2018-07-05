@@ -19,8 +19,8 @@
 
             <div class="add-event" fxLayoutAlign="center">
                     <mat-form-field>
-                        <input matInput placeholder="Event Location" name="eventlocation" [(ngModel)]="eventlocation">
-                        <!-- <input ngx-google-places-autocomplete matInput placeholder="Event Location" name="eventlocation" [(ngModel)]="eventlocation"> -->
+                       
+                      <input ngx-google-places-autocomplete matInput placeholder="Event Location" name="eventlocation" [(ngModel)]="eventlocation">
                     </mat-form-field>
                     <br>
             </div>
@@ -85,7 +85,8 @@
 
             <div fxLayoutAlign="center">
                     <button (click)="populateEvents()" mat-raised-button color="accent" >Display Events</button>
-            </div>
+                    
+                </div>
             <div fxLayoutAlign="center">
                     <button (click)="afterEvents()" mat-raised-button color="accent" >After Events</button>
             </div>
@@ -179,15 +180,15 @@
             </div>
             <br>
 
-<!--
+
             <div class="add-event" fxLayoutAlign="center">
                     <mat-form-field >
-                        <input matInput [matDatepicker]="endpickerEdit" placeholder="End Date" name="enddate" value={{enddate}} [(ngModel)]="enddate">
+                        <input matInput [matDatepicker]="endpickerEdit" placeholder="End Date" name="enddate" [(ngModel)]="enddate">
                         <mat-datepicker-toggle matSuffix [for]="endpickerEdit"></mat-datepicker-toggle>
                         <mat-datepicker #endpickerEdit></mat-datepicker>
                     </mat-form-field>
                     <mat-form-field>
-                            <mat-select placeholder="End Time" value={{endtime}} [(ngModel)]="endtime" name="endtime">
+                            <mat-select placeholder="End Time"[(ngModel)]="endtime" name="endtime">
                                 <mat-option *ngFor="let time of times" [value]="time" name="time">
                                 {{time}}
                                 </mat-option>
@@ -199,14 +200,14 @@
 
             <div class="add-event" fxLayoutAlign="center">
                     <mat-form-field>
-                        <mat-select placeholder="Time Zones" value={{currenttz}} [(ngModel)]="currenttz" name="soemthing">
+                        <mat-select placeholder="Time Zones" [(ngModel)]="currenttz" name="soemthing">
                             <mat-option *ngFor="let timezone of timezones" [value]="timezone" name="timezone">
                             {{timezone}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
                     
-            </div>   -->
+            </div>   
         
 
 

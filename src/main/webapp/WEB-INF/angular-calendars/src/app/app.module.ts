@@ -17,7 +17,11 @@ import { MaterialModule } from './material/material.module';
 import { LoginComponent } from './login/login.component';
 import { RoutingModule } from './routing/routing.module';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import {GooglePlaceModule} from 'ngx-google-places-autocomplete'
+import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
+import { LogoutComponent } from './logout/logout.component';
+import { PagNotFoundComponent } from './pag-not-found/pag-not-found.component';
+import {Globals} from './global'
+
 
 @NgModule({
   declarations: [
@@ -28,7 +32,9 @@ import {GooglePlaceModule} from 'ngx-google-places-autocomplete'
     AboutComponent,
     TasksComponent,
     NavBarComponent,
-    CalendarComponent
+    CalendarComponent,
+    LogoutComponent,
+    PagNotFoundComponent
 
   ],
   imports: [
@@ -43,7 +49,7 @@ import {GooglePlaceModule} from 'ngx-google-places-autocomplete'
     CalendarModule.forRoot()
   
   ],
-  providers: [],
+  providers: [Globals],
   bootstrap: [AppComponent],
   exports: [CalendarComponent]
 })

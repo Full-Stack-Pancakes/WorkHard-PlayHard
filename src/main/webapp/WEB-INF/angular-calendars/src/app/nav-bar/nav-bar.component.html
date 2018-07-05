@@ -1,40 +1,42 @@
 <mat-toolbar color="accent" fxLayout="row">  
     <div fxFlex fxLayout fxLayoutAlign="flex-end">
             <ul fxLayout fxLayoutGap="45px" class="navigation-items">
-              <li><a routerLink="/login">
+
+              
+              <li><a routerLink="/login"  *ngIf="!isLogin">
+              <!-- <li><a routerLink="/login"  *ngIf="!global.isSignIn"></a> -->
                   <mat-icon class="material-icons.md-24">input</mat-icon>
                 </a>
               </li>
               
-              <li><a routerLink="/home">
+              <li><a routerLink="/home"  *ngIf="isLogin">
+              <!-- <li><a routerLink="/home"  *ngIf="global.isSignIn"> -->
                   <mat-icon>home</mat-icon>
                 </a>
               </li>
 
-              <li><a routerLink="/calendar">
-                <mat-icon>timer</mat-icon>
+              <li><a routerLink="/calendar"  *ngIf="isLogin">
+              <!-- <li><a routerLink="/calendar"  *ngIf="global.isSignIn"> -->
+                <mat-icon>event</mat-icon>
                 </a>
               </li>
 
-              <li><a routerLink="/profile">
+              <li><a routerLink="/profile"  *ngIf="global.isSignIn">
                   <mat-icon>person</mat-icon>
                 </a>
               </li>
               
-              <li><a routerLink="/about">
-                    <mat-icon>home</mat-icon>
-                </a>
-              </li>
-              
-              <li><a routerLink="/tasks">
+              <li><a routerLink="/tasks"  *ngIf="global.isSignIn">
                     <mat-icon>timer</mat-icon>
                 </a>
               </li>
               
-              <li><a routerLink="/logout">
-                    <mat-icon>360</mat-icon>
+              <li><a routerLink="/logout"  *ngIf="global.isSignIn">
+                    <mat-icon>call_made</mat-icon>
                </a>
               </li>
+            
             </ul>
     </div>
 </mat-toolbar>
+{{global.myNum}}

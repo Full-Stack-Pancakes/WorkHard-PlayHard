@@ -21,6 +21,7 @@ import {
   MatIconModule,
   MatNativeDateModule,
   MatTableModule,
+  MatDialogModule
   
   
   
@@ -50,7 +51,8 @@ import {
     FlexLayoutModule,
     FormsModule,
     MatToolbarModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
    
 
 
@@ -77,7 +79,8 @@ import {
     FlexLayoutModule,
     FormsModule,
     MatToolbarModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
     
    
 
