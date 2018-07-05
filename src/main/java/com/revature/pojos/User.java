@@ -31,9 +31,6 @@ public class User {
 	@Column
 	String password;
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
-	List<Event> events;
-	
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -46,18 +43,6 @@ public class User {
 		this.email = email;
 		this.phone = phone;
 		this.password = password;
-	}
-	
-	
-	public User(String firstname, String lastname, String email, String phone, String password,
-			List<Event> events) {
-		super();
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.email = email;
-		this.phone = phone;
-		this.password = password;
-		this.events = events;
 	}
 
 	public int getUserid() {
@@ -99,18 +84,6 @@ public class User {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
-	public List<Event> getEvents() {
-		return events;
-	}
-
-	public void setEvents(List<Event> events) {
-		this.events = events;
-	}
-	
-	public void addEvents(Event e) {
-		this.events.add(e);
-	} 
 	
 	public String getPassword() {
 		return password;
@@ -123,7 +96,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userid=" + userid + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email
-				+ ", phone=" + phone + ", password=" + password + ", events=" + events + "]";
+				+ ", phone=" + phone + ", password=" + password + "]";
 	}
 	
 }

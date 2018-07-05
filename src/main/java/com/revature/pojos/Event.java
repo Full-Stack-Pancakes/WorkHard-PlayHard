@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table
-//@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Event {
 	
 	@Id
