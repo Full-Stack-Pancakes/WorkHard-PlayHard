@@ -77,4 +77,15 @@ public class EventDaoImpl implements EventDao {
 		eventlist = query.list();
 		return eventlist;
 	}
+
+	@Override
+	public List<Event> getEventsByUserId(int id) {
+		List<Event> eventlist = new ArrayList<Event>();
+		Session session = HibernateUtil.getSession();
+		String hql = "from Event where userid = :id";
+		Query query = session.createQuery(hql);
+		query.setParameter("id", id);
+		eventlist = query.list();
+		return eventlist;
+	}
 }

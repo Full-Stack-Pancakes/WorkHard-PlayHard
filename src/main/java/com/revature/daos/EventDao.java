@@ -13,4 +13,5 @@ public interface EventDao {
 	public Event updateEvent(Event event);
 	public Event deleteEvent(Event event);
 	public List<Event> getEventsByTimeFrame(Date startdate, Date duetime);
+	public List<Event> getEventsByUserId(int id);
 }
