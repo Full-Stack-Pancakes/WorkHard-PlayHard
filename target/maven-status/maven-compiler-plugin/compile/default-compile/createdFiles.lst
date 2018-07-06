@@ -10,6 +10,7 @@ com\revature\pojos\EventTimeCompare.class
 com\revature\daos\UserDaoImpl.class
 com\revature\pojos\Event.class
 com\revature\pojos\User.class
+com\revature\daos\EventStrategy.class
 com\revature\daos\EventDaoImpl.class
 com\revature\pojos\EventCompare.class
 com\revature\controller\UserController.class

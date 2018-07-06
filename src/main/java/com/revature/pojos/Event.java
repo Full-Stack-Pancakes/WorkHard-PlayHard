@@ -31,11 +31,12 @@ public class Event {
 	String eventtype;
 	@Column
 	Date inputtime;
-	
+	@Column
+	Date duetime;
 	@Column
 	Date starttime;
 	@Column
-	Date duetime;
+	Date endtime;
 	@Column
 	Time eventlength;
 	@Column
@@ -57,8 +58,8 @@ public class Event {
 	}
 
 	public Event(String summary, String location, String description, int priority, String eventtype, Date inputtime,
-			Date starttime, Date duetime, Time eventlength, Boolean splitable, Time minlength, String dayofweek,
-			String timezone, User user) {
+			Date duetime, Date starttime, Date endtime, Time eventlength, Boolean splitable, Time minlength,
+			String dayofweek, String timezone, User user) {
 		super();
 		this.summary = summary;
 		this.location = location;
@@ -66,8 +67,9 @@ public class Event {
 		this.priority = priority;
 		this.eventtype = eventtype;
 		this.inputtime = inputtime;
-		this.starttime = starttime;
 		this.duetime = duetime;
+		this.starttime = starttime;
+		this.endtime = endtime;
 		this.eventlength = eventlength;
 		this.splitable = splitable;
 		this.minlength = minlength;
@@ -76,6 +78,12 @@ public class Event {
 		this.user = user;
 	}
 
+	public Date getEndtime() {
+		return endtime;
+	}
+	public void setEndtime(Date endtime) {
+		this.endtime = endtime;
+	}
 	public int getEventid() {
 		return eventid;
 	}

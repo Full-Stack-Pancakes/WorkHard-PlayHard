@@ -20,7 +20,7 @@ import com.revature.daos.UserDaoImpl;
 import com.revature.exception.UserNotFoundException;
 import com.revature.pojos.User;
 
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins="http://localhost:8000")
 @RestController // takes the place of @Controller and @ResponseBody on each of the methods
 @RequestMapping("/users") // maps every request in this class
 public class UserController {
